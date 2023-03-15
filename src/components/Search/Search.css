@@ -3,8 +3,11 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 5%;
-  background-color: #002f5c;
+  padding: 10%;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1595061997366-1919ca8a0f12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+  background-size: cover;
+  background-position: center;
   color: white;
 }
 

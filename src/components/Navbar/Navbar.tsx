@@ -36,7 +36,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar position='static' sx={{ color: 'darkslategray', backgroundColor: 'white' }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <LocalFloristIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -72,7 +72,9 @@ const Navbar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{page}</Typography>
+                  <Typography textAlign='center' sx={{ color: 'darkslategray' }}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -101,7 +103,7 @@ const Navbar = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'darkslategray', display: 'block' }}
               >
                 {page}
               </Button>
