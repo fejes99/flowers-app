@@ -4,22 +4,20 @@ import {
   compose,
   legacy_createStore as createStore,
 } from 'redux';
-import thunk from 'redux-thunk';
-import flowerReducer from './reducers/flowerReducer';
+import thunk, { ThunkMiddleware } from 'redux-thunk';
+import flowersReducer from '../Flowers/State/flowersReducer';
+import StoreState from './store.d';
+import { FlowerActionTypes } from '../Flowers/State/flowerTypes';
 
-const rootReducer = combineReducers({
-  flower: flowerReducer,
+const rootReducer = combineReducers<StoreState>({
+  flowers: flowersReducer,
 });
 
-const logger = (store: any) => {
-  return (next: any) => {
-    return (action: any) => {
-      console.log('[Middleware] Dispatching', action);
-      const result = next(action);
-      console.log('[Middleware] next state', store.getState());
-      return result;
-    };
-  };
+const logger = (store: any) => (next: any) => (action: any) => {
+  console.log('[Middleware] Dispatching', action);
+  const result = next(action);
+  console.log('[Middleware] next state', store.getState());
+  return result;
 };
 
 declare global {
@@ -30,6 +28,9 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)));
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(logger, thunk as ThunkMiddleware<StoreState, FlowerActionTypes>))
+);
 
 export default store;

@@ -1,0 +1,9 @@
+.flowers-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 40px auto;
+  max-width: 1440px;
+  padding-right: 0;
+}
