@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  background-color: whitesmoke;
+  color: darkslategrey;
+}
+
+.navbar-nav {
+  display: flex;
+  height: inherit;
+  align-items: center;
+  justify-content: center;
+}
