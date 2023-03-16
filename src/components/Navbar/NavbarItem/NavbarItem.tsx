@@ -3,16 +3,14 @@ import { NavLink } from 'react-router-dom';
 import './NavbarItem.css';
 
 type Props = {
-  item: { name: string; link: string };
+  item: { name: string; url: string };
 };
 
-const NavbarItem: React.FC<Props> = ({ item: { name, link } }) => {
-  const isActive = () => {};
-
+const NavbarItem: React.FC<Props> = ({ item: { name, url } }) => {
   return (
     <div className='navbar-item'>
       <NavLink
-        to={link}
+        to={url}
         // isActive={isActive}
         //  activeClassName='active'
       >

@@ -6,15 +6,15 @@ import NavbarItem from './NavbarItem/NavbarItem';
 const navigationItems = [
   {
     name: 'Flowers',
-    link: `/flowers`,
+    url: `/flowers`,
   },
   {
     name: 'Favorite',
-    link: `/favorite`,
+    url: `/favorite`,
   },
   {
     name: 'Profile',
-    link: `/profile`,
+    url: `/profile`,
   },
 ];
 

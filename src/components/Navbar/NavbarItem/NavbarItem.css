@@ -3,7 +3,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  width: 220px;
+  width: 160px;
   height: inherit;
   transition: all 0.2s;
 }
@@ -25,6 +25,7 @@
 }
 
 .navbar-item a.active {
-  color: white;
+  color: royalblue;
+  text-transform: uppercase;
   font-weight: bold;
 }
