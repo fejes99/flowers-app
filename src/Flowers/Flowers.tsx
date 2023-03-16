@@ -1,5 +1,5 @@
 import './Flowers.css';
-import Search from '../components/Search/Search';
+import Search from '../common/components/Search/Search';
 import FlowerList from './FlowerList/FlowerList';
 
 const Flowers: React.FC = () => {

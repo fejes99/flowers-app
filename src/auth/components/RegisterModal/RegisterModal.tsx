@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { formatDate } from '../helpers/formatDate';
-import { useOnEscapeKey } from '../hooks/useCloseOnEscapeKey';
+import { formatDate } from '../../../common/helpers/formatDate';
+import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import DatePicker from './DatePicker/DatePicker';
 
 import './RegisterModal.css';

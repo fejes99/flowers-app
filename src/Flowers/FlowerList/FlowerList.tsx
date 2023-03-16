@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './FlowerList.css';
 import Flower from '../Flowers.d';
 import { fetchFlowers } from '../State/flowerActions';
-import FlowerCard from '../../components/FlowerCard/FlowerCard';
+import FlowerCard from '../../common/components/FlowerCard/FlowerCard';
 
 interface Props {
   flowers: Flower[];
@@ -16,8 +16,7 @@ interface Props {
 const FlowerList: React.FC<Props> = ({ flowers, loading, error, onFetchFlowers }) => {
   useEffect(() => {
     onFetchFlowers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [onFetchFlowers]);
 
   if (loading) return <div>Loading</div>;
   if (error) return <div>{error}</div>;

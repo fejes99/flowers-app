@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useOnEscapeKey } from '../hooks/useCloseOnEscapeKey';
+import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import './LoginModal.css';
 
 interface LoginData {
@@ -32,8 +32,8 @@ const LoginModal: React.FC<Props> = ({ show, onClose }) => {
   };
 
   return (
-    <div className={`modal ${show ? 'show' : ''}`}>
-      <div className='login-modal'>
+    <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
+      <div className='login-modal' onClick={(event) => event.stopPropagation()}>
         <form className='login-modal-form' onSubmit={handleSubmit}>
           <h2 className='login-modal-title'>Login</h2>
           <div className='login-modal-row'>

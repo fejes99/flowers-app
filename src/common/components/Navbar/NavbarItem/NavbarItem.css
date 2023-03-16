@@ -29,3 +29,15 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+
+.navbar-item span {
+  color: darkslategray;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.navbar-item span:hover {
+  color: white;
+}

@@ -1,6 +1,5 @@
 import React from 'react';
-import { useOnEscapeKey } from '../hooks/useCloseOnEscapeKey';
-import { RegisterData } from '../RegisterModal/RegisterModal';
+import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import './ProfileModal.css';
 
 type Props = {
@@ -14,7 +13,7 @@ const ProfileModal: React.FC<Props> = ({ show, onClose }) => {
 
   return (
     <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
-      <div className='profile-modal'>
+      <div className='profile-modal' onClick={(event) => event.stopPropagation()}>
         <h2 className='profile-modal-title'>Profile</h2>
         <div className='profile-modal-row'>
           <label>First Name:</label>
