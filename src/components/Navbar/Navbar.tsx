@@ -18,7 +18,7 @@ const navigationItems = [
   },
 ];
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   let navbarItems = navigationItems.map((item) => {
     return <NavbarItem key={item.name} item={item} />;
   });

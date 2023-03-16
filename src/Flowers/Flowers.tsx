@@ -1,14 +1,12 @@
 import './Flowers.css';
 import Search from '../components/Search/Search';
-import FlowersList from './FlowersList/FlowersList';
+import FlowerList from './FlowerList/FlowerList';
 
-type Props = {};
-
-const Flowers = (props: Props) => {
+const Flowers: React.FC = () => {
   return (
     <div className='flowers-container'>
       <Search onChange={() => {}} />
-      <FlowersList />
+      <FlowerList />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from 'react-router';
 import Favorite from './Favorite/Favorite';
 import Profile from './Profile/Profile';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className='App'>
       <Navbar />

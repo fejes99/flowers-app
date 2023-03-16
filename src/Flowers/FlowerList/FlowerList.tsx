@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import './FlowersList.css';
+import './FlowerList.css';
 import Flower from '../Flowers.d';
 import { fetchFlowers } from '../State/flowerActions';
-import FlowerCard from './FlowerCard/FlowerCard';
+import FlowerCard from '../../components/FlowerCard/FlowerCard';
 
 interface Props {
   flowers: Flower[];
@@ -13,7 +13,7 @@ interface Props {
   onFetchFlowers: () => void;
 }
 
-const FlowersList = ({ flowers, loading, error, onFetchFlowers }: Props) => {
+const FlowerList: React.FC<Props> = ({ flowers, loading, error, onFetchFlowers }) => {
   useEffect(() => {
     onFetchFlowers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,7 +25,7 @@ const FlowersList = ({ flowers, loading, error, onFetchFlowers }: Props) => {
 
   let flowerCards = flowers && flowers.map((flower: Flower) => <FlowerCard flower={flower} />);
 
-  return <div className='flowers-list'>{flowerCards}</div>;
+  return <div className='flower-list'>{flowerCards}</div>;
 };
 
 const mapStateToProps = (state: any) => {
@@ -42,4 +42,4 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FlowersList);
+export default connect(mapStateToProps, mapDispatchToProps)(FlowerList);
