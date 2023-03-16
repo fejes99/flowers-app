@@ -13,13 +13,6 @@ const rootReducer = combineReducers<StoreState>({
   flowers: flowersReducer,
 });
 
-const logger = (store: any) => (next: any) => (action: any) => {
-  console.log('[Middleware] Dispatching', action);
-  const result = next(action);
-  console.log('[Middleware] next state', store.getState());
-  return result;
-};
-
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
@@ -30,7 +23,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(logger, thunk as ThunkMiddleware<StoreState, FlowerActionTypes>))
+  composeEnhancers(applyMiddleware(thunk as ThunkMiddleware<StoreState, FlowerActionTypes>))
 );
 
 export default store;
