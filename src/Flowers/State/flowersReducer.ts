@@ -1,10 +1,5 @@
 import FlowerState from './flowerState';
-import {
-  FETCH_FLOWERS_FAILURE,
-  FETCH_FLOWERS_REQUEST,
-  FETCH_FLOWERS_SUCCESS,
-  FlowerActionTypes,
-} from './flowerTypes';
+import * as actionTypes from './flowerTypes';
 
 const initialState: FlowerState = {
   flowers: [],
@@ -12,13 +7,16 @@ const initialState: FlowerState = {
   error: null,
 };
 
-const flowersReducer = (state = initialState, action: FlowerActionTypes): FlowerState => {
+const flowersReducer = (
+  state = initialState,
+  action: actionTypes.FlowerActionTypes
+): FlowerState => {
   switch (action.type) {
-    case FETCH_FLOWERS_REQUEST:
+    case actionTypes.FETCH_FLOWERS_REQUEST:
       return { ...state, loading: true };
-    case FETCH_FLOWERS_SUCCESS:
+    case actionTypes.FETCH_FLOWERS_SUCCESS:
       return { ...state, loading: false, flowers: action.payload };
-    case FETCH_FLOWERS_FAILURE:
+    case actionTypes.FETCH_FLOWERS_FAIL:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

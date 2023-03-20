@@ -2,7 +2,7 @@ import Flower from '../Flowers.d';
 
 export const FETCH_FLOWERS_REQUEST = 'FETCH_FLOWERS_REQUEST';
 export const FETCH_FLOWERS_SUCCESS = 'FETCH_FLOWERS_SUCCESS';
-export const FETCH_FLOWERS_FAILURE = 'FETCH_FLOWERS_FAILURE';
+export const FETCH_FLOWERS_FAIL = 'FETCH_FLOWERS_FAIL';
 
 export interface IFlowerState {
   flowers: Flower[];
@@ -19,12 +19,12 @@ interface FetchFlowersSuccessAction {
   payload: Flower[];
 }
 
-interface FetchFlowersFailureAction {
-  type: typeof FETCH_FLOWERS_FAILURE;
+interface FetchFlowersFailAction {
+  type: typeof FETCH_FLOWERS_FAIL;
   payload: string;
 }
 
 export type FlowerActionTypes =
   | FetchFlowersRequestAction
   | FetchFlowersSuccessAction
-  | FetchFlowersFailureAction;
+  | FetchFlowersFailAction;

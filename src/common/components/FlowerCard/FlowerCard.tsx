@@ -7,7 +7,9 @@ interface Props {
   flower: Flower;
 }
 
-const FlowerCard = ({ flower: { name, latin_name, profile_picture, favorite } }: Props) => {
+const FlowerCard: React.FC<Props> = ({
+  flower: { name, latin_name, profile_picture, favorite },
+}) => {
   return (
     <div className='flower-card'>
       <img src={profile_picture} alt={name} className='flower-card-img' />

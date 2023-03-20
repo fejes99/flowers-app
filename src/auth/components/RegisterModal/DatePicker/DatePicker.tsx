@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import './DatePicker.css';
+import * as React from 'react';
+import { Dayjs } from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker as Picker } from '@mui/x-date-pickers/DatePicker';
 
 type Props = {
-  onDateChange: (date: Date) => void;
+  onDateChange: (date: string) => void;
 };
 
 const DatePicker: React.FC<Props> = ({ onDateChange }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [value, setValue] = React.useState<Dayjs | null>(null);
 
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const dateValue = event.target.value;
-    const date = new Date(dateValue);
-    setSelectedDate(date);
-    onDateChange(date);
-  };
+  const handleDateChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
 
-  const formatDate = (date: Date): string => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear().toString();
-    return `${year}-${month}-${day}`;
+    onDateChange(newValue!.format('DD/MM/YYYY'));
   };
 
   return (
-    <div className='date-picker'>
-      <input type='date' value={formatDate(selectedDate)} onChange={handleDateChange} />
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Picker
+        label='Date of birth'
+        value={value}
+        onChange={(newValue) => handleDateChange(newValue)}
+        // renderInput={(params: any) => <TextField {...params} />}
+      />
+    </LocalizationProvider>
   );
 };
 

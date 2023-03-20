@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import './Navbar.css';
+import NavbarItem, { NavbarItemProps } from './NavbarItem/NavbarItem';
+import useModal from '../../../auth/hooks/useModal';
 import ProfileModal from '../../../auth/components/ProfileModal/ProfileModal';
 import LoginModal from '../../../auth/components/LoginModal/LoginModal';
 import RegisterModal from '../../../auth/components/RegisterModal/RegisterModal';
-import useModal from '../../../auth/hooks/useModal';
-import './Navbar.css';
-import NavbarItem, { NavbarItemProps } from './NavbarItem/NavbarItem';
 
-const Navbar: React.FC = () => {
+interface Props {
+  isAuthenticated: boolean;
+}
+
+const Navbar: React.FC<Props> = ({ isAuthenticated }) => {
   const {
     showProfileModal,
     showLoginModal,
@@ -16,8 +21,6 @@ const Navbar: React.FC = () => {
     openRegisterModal,
     closeAllModals,
   } = useModal();
-
-  const isLoggedIn = false;
 
   const navbarItems: NavbarItemProps[] = [
     {
@@ -32,7 +35,7 @@ const Navbar: React.FC = () => {
     },
   ];
 
-  if (isLoggedIn) {
+  if (isAuthenticated) {
     navbarItems.push({
       name: 'Profile',
       onClick: openProfileModal,
@@ -64,4 +67,10 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = (state: any) => {
+  return {
+    isAuthenticated: state.auth.user !== null,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

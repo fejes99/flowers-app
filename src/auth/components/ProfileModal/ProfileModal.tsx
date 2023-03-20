@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
+import { fetchUser, logoutUser } from '../../State/authActions';
 import './ProfileModal.css';
 
-type Props = {
-  // registerData: RegisterData,
-  show: boolean;
-  onClose: () => void;
-};
+export interface ProfileData {
+  first_name: string;
+  last_name: string;
+}
 
-const ProfileModal: React.FC<Props> = ({ show, onClose }) => {
+interface Props {
+  show: boolean;
+  user: User;
+  onClose: () => void;
+  onFetchUser: (token: string) => void;
+  onLogoutUser: () => void;
+}
+
+const ProfileModal: React.FC<Props> = ({ show, user, onClose, onFetchUser, onLogoutUser }) => {
+  useEffect(() => {
+    if (user?.token) onFetchUser(user?.token);
+  }, [onFetchUser, user?.token]);
+
   useOnEscapeKey(onClose);
+
+  const handleLogout = () => {
+    onLogoutUser();
+    onClose();
+  };
 
   return (
     <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
@@ -17,21 +35,13 @@ const ProfileModal: React.FC<Props> = ({ show, onClose }) => {
         <h2 className='profile-modal-title'>Profile</h2>
         <div className='profile-modal-row'>
           <label>First Name:</label>
-          <span>petar</span>
+          <span>{user?.data?.first_name}</span>
         </div>
         <div className='profile-modal-row'>
           <label>Last Name:</label>
-          <span>petrovic</span>
+          <span>{user?.data?.last_name}</span>
         </div>
-        <div className='profile-modal-row'>
-          <label>Email:</label>
-          <span>pera@gmail.com</span>
-        </div>
-        <div className='profile-modal-row'>
-          <label>Date of Birth:</label>
-          <span>test</span>
-        </div>
-        <button className='profile-modal-logout-button' type='submit'>
+        <button className='profile-modal-logout-button' onClick={handleLogout}>
           Logout
         </button>
       </div>
@@ -39,4 +49,17 @@ const ProfileModal: React.FC<Props> = ({ show, onClose }) => {
   );
 };
 
-export default ProfileModal;
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+const mapDispatchToProps = () => (dispatch: any) => {
+  return {
+    onFetchUser: (token: string) => dispatch(fetchUser(token)),
+    onLogoutUser: () => dispatch(logoutUser()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileModal);

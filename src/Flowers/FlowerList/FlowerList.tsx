@@ -22,7 +22,7 @@ const FlowerList: React.FC<Props> = ({ flowers, loading, error, onFetchFlowers }
   if (error) return <div>{error}</div>;
   if (!flowers.length) return <div>No flowers</div>;
 
-  let flowerCards =
+  let flowerCards: JSX.Element[] =
     flowers && flowers.map((flower: Flower) => <FlowerCard key={flower.id} flower={flower} />);
 
   return <div className='flower-list'>{flowerCards}</div>;

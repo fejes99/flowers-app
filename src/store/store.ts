@@ -5,12 +5,15 @@ import {
   legacy_createStore as createStore,
 } from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
-import flowersReducer from '../Flowers/State/flowersReducer';
+
 import StoreState from './store.d';
+import flowersReducer from '../Flowers/State/flowersReducer';
 import { FlowerActionTypes } from '../Flowers/State/flowerTypes';
+import authReducer from '../auth/State/authReducer';
 
 const rootReducer = combineReducers<StoreState>({
   flowers: flowersReducer,
+  auth: authReducer,
 });
 
 declare global {
