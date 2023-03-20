@@ -4,6 +4,7 @@ import './RegisterModal.css';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import DatePicker from './DatePicker/DatePicker';
 import { registerUser } from '../../State/authActions';
+import useModal from '../../hooks/useModal';
 
 export interface RegisterData {
   email: string;
@@ -28,6 +29,8 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onRegisterUser }) => {
     date_of_birth: '',
   });
 
+  const { openRegisterSuccessModal } = useModal();
+
   useOnEscapeKey(onClose);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -43,6 +46,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onRegisterUser }) => {
     event.preventDefault();
     onRegisterUser(registerData);
     onClose();
+    openRegisterSuccessModal();
   };
 
   return (

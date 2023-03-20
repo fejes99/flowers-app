@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './LoginModal.css';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import { loginUser } from '../../State/authActions';
+import useModal from '../../hooks/useModal';
 
 export interface LoginData {
   email: string;
@@ -12,10 +13,11 @@ export interface LoginData {
 type Props = {
   show: boolean;
   onClose: () => void;
+  onSuccess: () => void;
   onLoginUser: (logindata: LoginData) => void;
 };
 
-const LoginModal: React.FC<Props> = ({ show, onClose, onLoginUser }) => {
+const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) => {
   const [loginData, setLoginData] = useState<LoginData>({
     email: '',
     password: '',
@@ -32,6 +34,7 @@ const LoginModal: React.FC<Props> = ({ show, onClose, onLoginUser }) => {
     event.preventDefault();
     onLoginUser(loginData);
     onClose();
+    onSuccess();
   };
 
   return (

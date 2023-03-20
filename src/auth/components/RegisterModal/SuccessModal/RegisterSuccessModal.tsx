@@ -1,13 +1,13 @@
-import './SuccessRegisterModal.css';
+import './RegisterSuccessModal.css';
 
-type Props = {};
+type Props = {
+  show: boolean;
+  onClose: () => void;
+};
 
-const SuccessRegisterModal = (props: Props) => {
+const RegisterSuccessModal: React.FC<Props> = ({ show, onClose }) => {
   return (
-    <div
-    // className={`modal ${show ? 'show' : ''}`}
-    // onClick={onClose}
-    >
+    <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
       <div className='register-success-modal' onClick={(event) => event.stopPropagation()}>
         <h2 className='register-success-modal-title'>
           Congratulations! You have successfully signed up!
@@ -20,4 +20,4 @@ const SuccessRegisterModal = (props: Props) => {
   );
 };
 
-export default SuccessRegisterModal;
+export default RegisterSuccessModal;
