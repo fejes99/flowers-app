@@ -16,12 +16,12 @@ interface FetchFlowersRequestAction {
 
 interface FetchFlowersSuccessAction {
   type: typeof FETCH_FLOWERS_SUCCESS;
-  payload: Flower[];
+  flowers: Flower[];
 }
 
 interface FetchFlowersFailAction {
   type: typeof FETCH_FLOWERS_FAIL;
-  payload: string;
+  error: string;
 }
 
 export type FlowerActionTypes =

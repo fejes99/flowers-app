@@ -9,12 +9,12 @@ const fetchFlowersRequest = () => ({
 
 const fetchFlowersSuccess = (flowers: Flower[]) => ({
   type: actionTypes.FETCH_FLOWERS_SUCCESS,
-  payload: flowers,
+  flowers: flowers,
 });
 
 const fetchFlowersFailure = (error: string) => ({
   type: actionTypes.FETCH_FLOWERS_FAIL,
-  payload: error,
+  error: error,
 });
 
 export const fetchFlowers = () => (dispatch: Dispatch) => {

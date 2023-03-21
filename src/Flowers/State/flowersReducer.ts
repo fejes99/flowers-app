@@ -14,11 +14,11 @@ const flowersReducer: Reducer<FlowerState, actionTypes.FlowerActionTypes> = (
 ): FlowerState => {
   switch (action.type) {
     case actionTypes.FETCH_FLOWERS_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, flowers: [], error: null };
     case actionTypes.FETCH_FLOWERS_SUCCESS:
-      return { ...state, loading: false, flowers: action.payload };
+      return { ...state, loading: false, flowers: action.flowers };
     case actionTypes.FETCH_FLOWERS_FAIL:
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }
