@@ -14,19 +14,17 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
 ): AuthState => {
   switch (action.type) {
     case actionTypes.REGISTER_REQUEST:
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true, user: null, error: null };
     case actionTypes.REGISTER_SUCCESS:
       return {
         ...state,
         loading: false,
-        user: null,
-        error: null,
       };
     case actionTypes.REGISTER_FAIL:
       return { ...state, loading: false, error: action.error };
 
     case actionTypes.LOGIN_REQUEST:
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true, user: null, error: null };
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
@@ -35,7 +33,6 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
           ...state.user,
           token: action.token,
         },
-        error: null,
       };
     case actionTypes.LOGIN_FAIL:
       return { ...state, loading: false, error: action.error };
