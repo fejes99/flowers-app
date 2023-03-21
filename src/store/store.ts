@@ -1,17 +1,17 @@
-import {
-  applyMiddleware,
-  combineReducers,
-  compose,
-  legacy_createStore as createStore,
-} from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore, Reducer } from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 
-import StoreState from './store.d';
+import FlowerState from '../Flowers/State/flowerState';
 import flowersReducer from '../Flowers/State/flowersReducer';
-import { FlowerActionTypes } from '../Flowers/State/flowerTypes';
+import AuthState from '../auth/State/authState';
 import authReducer from '../auth/State/authReducer';
 
-const rootReducer = combineReducers<StoreState>({
+export interface StoreState {
+  flowers: FlowerState;
+  auth: AuthState;
+}
+
+const rootReducer: Reducer<StoreState, any> = combineReducers<StoreState>({
   flowers: flowersReducer,
   auth: authReducer,
 });
@@ -26,7 +26,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk as ThunkMiddleware<StoreState, FlowerActionTypes>))
+  composeEnhancers(applyMiddleware(thunk as ThunkMiddleware<StoreState, any>))
 );
 
 export default store;

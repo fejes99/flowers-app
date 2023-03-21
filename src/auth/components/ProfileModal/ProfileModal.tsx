@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import './ProfileModal.css';
+import User from '../../Auth';
+import { StoreState } from '../../../store/store';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import { fetchUser, logoutUser } from '../../State/authActions';
-import './ProfileModal.css';
 
 export interface ProfileData {
   first_name: string;
@@ -11,7 +13,7 @@ export interface ProfileData {
 
 interface Props {
   show: boolean;
-  user: User;
+  user: User | null;
   onClose: () => void;
   onFetchUser: (token: string) => void;
   onLogoutUser: () => void;
@@ -49,7 +51,7 @@ const ProfileModal: React.FC<Props> = ({ show, user, onClose, onFetchUser, onLog
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     user: state.auth.user,
   };

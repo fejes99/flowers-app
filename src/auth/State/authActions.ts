@@ -6,11 +6,10 @@ import { RegisterData } from '../components/RegisterModal/RegisterModal';
 import * as actionTypes from './authTypes';
 
 const registerUserRequest = () => ({ type: actionTypes.REGISTER_REQUEST });
-const registerUserSuccess = (token: string) => ({
+const registerUserSuccess = () => ({
   type: actionTypes.REGISTER_SUCCESS,
-  payload: token,
 });
-const registerUserFail = (error: string) => ({ type: actionTypes.REGISTER_FAIL, payload: error });
+const registerUserFail = (error: string) => ({ type: actionTypes.REGISTER_FAIL, error: error });
 
 export const registerUser = (registerData: RegisterData) => (dispatch: Dispatch) => {
   dispatch(registerUserRequest());
@@ -18,14 +17,13 @@ export const registerUser = (registerData: RegisterData) => (dispatch: Dispatch)
   axios
     .post('/users/register', registerData)
     .then((response) => {
-      localStorage.setItem('auth_token', response.data.auth_token);
-      dispatch(registerUserSuccess(response.data.auth_token));
+      dispatch(registerUserSuccess());
     })
     .catch((error) => dispatch(registerUserFail(error)));
 };
 
 const loginUserRequest = () => ({ type: actionTypes.LOGIN_REQUEST });
-const loginUserSuccess = (token: string) => ({ type: actionTypes.LOGIN_SUCCESS, payload: token });
+const loginUserSuccess = (token: string) => ({ type: actionTypes.LOGIN_SUCCESS, token: token });
 const loginUserFail = (error: string) => ({ type: actionTypes.LOGIN_FAIL, error: error });
 
 export const loginUser = (loginData: LoginData) => (dispatch: Dispatch) => {
@@ -40,7 +38,7 @@ export const loginUser = (loginData: LoginData) => (dispatch: Dispatch) => {
 const fetchUserRequest = () => ({ type: actionTypes.FETCH_USER_REQUEST });
 const fetchUserSuccess = (profileData: ProfileData) => ({
   type: actionTypes.FETCH_USER_SUCCESS,
-  payload: profileData,
+  data: profileData,
 });
 const fetchUserFail = (error: string) => ({ type: actionTypes.FETCH_USER_FAIL, payload: error });
 

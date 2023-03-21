@@ -1,3 +1,4 @@
+import { Reducer } from 'redux';
 import FlowerState from './flowerState';
 import * as actionTypes from './flowerTypes';
 
@@ -7,9 +8,9 @@ const initialState: FlowerState = {
   error: null,
 };
 
-const flowersReducer = (
+const flowersReducer: Reducer<FlowerState, actionTypes.FlowerActionTypes> = (
   state = initialState,
-  action: actionTypes.FlowerActionTypes
+  action
 ): FlowerState => {
   switch (action.type) {
     case actionTypes.FETCH_FLOWERS_REQUEST:

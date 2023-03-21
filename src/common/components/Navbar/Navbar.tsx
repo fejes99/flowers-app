@@ -8,12 +8,14 @@ import LoginModal from '../../../auth/components/LoginModal/LoginModal';
 import RegisterModal from '../../../auth/components/RegisterModal/RegisterModal';
 import LoginSuccessModal from '../../../auth/components/LoginModal/SuccessModal/LoginSuccessModal';
 import RegisterSuccessModal from '../../../auth/components/RegisterModal/SuccessModal/RegisterSuccessModal';
+import User from '../../../auth/Auth';
+import { StoreState } from '../../../store/store';
 
 interface Props {
-  isAuthenticated: boolean;
+  user: User | null;
 }
 
-const Navbar: React.FC<Props> = ({ isAuthenticated }) => {
+const Navbar: React.FC<Props> = ({ user }) => {
   const {
     showProfileModal,
     showLoginModal,
@@ -41,9 +43,9 @@ const Navbar: React.FC<Props> = ({ isAuthenticated }) => {
     },
   ];
 
-  if (isAuthenticated) {
+  if (user !== null) {
     navbarItems.push({
-      name: 'Profile',
+      name: `${user.data?.first_name} ${user.data?.last_name}`,
       onClick: openProfileModal,
     });
   } else {
@@ -71,17 +73,29 @@ const Navbar: React.FC<Props> = ({ isAuthenticated }) => {
           onClose={closeAllModals}
           onSuccess={openLoginSuccessModal}
         />
-        <LoginSuccessModal show={showLoginSuccessModal} onClose={closeAllModals} />
-        <RegisterModal show={showRegisterModal} onClose={closeAllModals} />
-        <RegisterSuccessModal show={showRegisterSuccessModal} onClose={closeAllModals} />
+        <LoginSuccessModal
+          show={showLoginSuccessModal}
+          onClose={closeAllModals}
+          onProfile={openProfileModal}
+        />
+        <RegisterModal
+          show={showRegisterModal}
+          onClose={closeAllModals}
+          onSuccess={openRegisterSuccessModal}
+        />
+        <RegisterSuccessModal
+          show={showRegisterSuccessModal}
+          onClose={closeAllModals}
+          onSuccess={openLoginModal}
+        />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StoreState) => {
   return {
-    isAuthenticated: state.auth.user !== null,
+    user: state.auth.user,
   };
 };
 

@@ -5,6 +5,8 @@ import './FlowerList.css';
 import Flower from '../Flowers.d';
 import { fetchFlowers } from '../State/flowerActions';
 import FlowerCard from '../../common/components/FlowerCard/FlowerCard';
+import Loader from '../../common/components/Loader/Loader';
+import { StoreState } from '../../store/store';
 
 interface Props {
   flowers: Flower[];
@@ -18,7 +20,7 @@ const FlowerList: React.FC<Props> = ({ flowers, loading, error, onFetchFlowers }
     onFetchFlowers();
   }, [onFetchFlowers]);
 
-  if (loading) return <div>Loading</div>;
+  if (loading) return <Loader />;
   if (error) return <div>{error}</div>;
   if (!flowers.length) return <div>No flowers</div>;
 
@@ -28,7 +30,7 @@ const FlowerList: React.FC<Props> = ({ flowers, loading, error, onFetchFlowers }
   return <div className='flower-list'>{flowerCards}</div>;
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     flowers: state.flowers.flowers,
     loading: state.flowers.loading,

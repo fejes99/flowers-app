@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import './RegisterModal.css';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import DatePicker from './DatePicker/DatePicker';
 import { registerUser } from '../../State/authActions';
-import useModal from '../../hooks/useModal';
 
 export interface RegisterData {
   email: string;
@@ -17,10 +16,12 @@ export interface RegisterData {
 type Props = {
   show: boolean;
   onClose: () => void;
+  onSuccess: () => void;
   onRegisterUser: (registerData: RegisterData) => void;
 };
 
-const RegisterModal: React.FC<Props> = ({ show, onClose, onRegisterUser }) => {
+const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUser }) => {
+  const [validForm, setValidForm] = useState(false);
   const [registerData, setRegisterData] = useState<RegisterData>({
     email: '',
     password: '',
@@ -29,7 +30,11 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onRegisterUser }) => {
     date_of_birth: '',
   });
 
-  const { openRegisterSuccessModal } = useModal();
+  useEffect(() => {
+    const isFormValid: boolean = Object.values(registerData).every((value) => value !== '');
+    console.log('🚀 ~ file: RegisterModal.tsx:35 ~ useEffect ~ isFormValid:', isFormValid);
+    if (isFormValid) setValidForm(true);
+  }, [registerData]);
 
   useOnEscapeKey(onClose);
 
@@ -44,9 +49,11 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onRegisterUser }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    onRegisterUser(registerData);
-    onClose();
-    openRegisterSuccessModal();
+    if (validForm) {
+      onRegisterUser(registerData);
+      onClose();
+      onSuccess();
+    }
   };
 
   return (
@@ -78,13 +85,15 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onRegisterUser }) => {
               type={'password'}
               value={registerData.password}
               onChange={handleInputChange}
+              pattern='.{6,}'
+              title='Password must have a minimum length of 6 characters'
             />
           </div>
           <div className='register-modal-row'>
             <label>Date of Birth:</label>
             <DatePicker onDateChange={handleDateChange} />
           </div>
-          <button className='register-modal-submit-button' type='submit'>
+          <button className='register-modal-submit-button' type='submit' disabled={!validForm}>
             Create Account
           </button>
         </form>

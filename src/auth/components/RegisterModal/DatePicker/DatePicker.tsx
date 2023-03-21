@@ -23,7 +23,6 @@ const DatePicker: React.FC<Props> = ({ onDateChange }) => {
         label='Date of birth'
         value={value}
         onChange={(newValue) => handleDateChange(newValue)}
-        // renderInput={(params: any) => <TextField {...params} />}
       />
     </LocalizationProvider>
   );

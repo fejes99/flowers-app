@@ -19,21 +19,10 @@ type modalFunctionsType = {
 
 const useModal = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
-  console.log('🚀 ~ file: useModal.ts:22 ~ useModal ~ showProfileModal:', showProfileModal);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  console.log('🚀 ~ file: useModal.ts:24 ~ useModal ~ showLoginModal:', showLoginModal);
   const [showLoginSuccessModal, setShowLoginSuccessModal] = useState(false);
-  console.log(
-    '🚀 ~ file: useModal.ts:26 ~ useModal ~ showLoginSuccessModal:',
-    showLoginSuccessModal
-  );
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  console.log('🚀 ~ file: useModal.ts:28 ~ useModal ~ showRegisterModal:', showRegisterModal);
   const [showRegisterSuccessModal, setShowRegisterSuccessModal] = useState(false);
-  console.log(
-    '🚀 ~ file: useModal.ts:30 ~ useModal ~ showRegisterSuccessModal:',
-    showRegisterSuccessModal
-  );
 
   const closeAllModals = useCallback((): void => {
     setShowProfileModal(false);
@@ -54,7 +43,6 @@ const useModal = () => {
   }, [closeAllModals]);
 
   const openLoginSuccessModal = useCallback((): void => {
-    console.log('radi');
     setShowLoginModal(false);
     setShowLoginSuccessModal(true);
   }, []);

@@ -55,6 +55,16 @@
   margin-top: 20px;
 }
 
+.register-modal-submit-button:disabled {
+  background-color: rgb(50, 53, 53);
+  cursor: default;
+}
+
+.register-modal-submit-button:disabled:hover {
+  background-color: rgb(38, 40, 40);
+  cursor: default;
+}
+
 .register-modal-submit-button:hover {
   background-color: #0069d9;
 }
