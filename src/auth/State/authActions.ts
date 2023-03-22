@@ -1,3 +1,4 @@
+import { removeFavoriteFlowers } from './../../Flowers/State/flowerActions';
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import { LoginData } from '../components/LoginModal/LoginModal';
@@ -54,5 +55,6 @@ export const fetchUser = (token: string) => (dispatch: Dispatch) => {
 const logout = () => ({ type: actionTypes.LOGOUT_USER });
 
 export const logoutUser = () => (dispatch: Dispatch) => {
+  removeFavoriteFlowers();
   dispatch(logout());
 };

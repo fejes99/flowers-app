@@ -1,10 +1,15 @@
 import './Search.css';
 
-type Props = {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+interface Props {
+  onChange: (query: string) => void;
+}
 
 const Search: React.FC<Props> = ({ onChange }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    onChange(event.target.value);
+  };
+
   return (
     <div className='search-contailer'>
       <input
@@ -12,7 +17,7 @@ const Search: React.FC<Props> = ({ onChange }) => {
         className='search'
         type='text'
         placeholder='Search...'
-        onChange={onChange}
+        onChange={handleChange}
       />
     </div>
   );

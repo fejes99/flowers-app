@@ -1,4 +1,4 @@
-interface Flower {
+export interface Flower {
   id: string;
   favorite: boolean;
   name: string;
@@ -7,4 +7,8 @@ interface Flower {
   sightings: string;
 }
 
-export default Flower;
+export interface FavoriteFlower {
+  id: string;
+  user_id: string;
+  flower: Flower;
+}

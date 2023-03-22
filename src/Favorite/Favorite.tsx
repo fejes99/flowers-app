@@ -1,7 +1,11 @@
-type Props = {};
+import FavoriteList from './FavoriteList/FavoriteList';
 
-const Favorite = (props: Props) => {
-  return <div>Favorite</div>;
+const Favorite: React.FC = () => {
+  return (
+    <div>
+      <FavoriteList />
+    </div>
+  );
 };
 
 export default Favorite;

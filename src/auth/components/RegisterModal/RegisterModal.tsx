@@ -32,7 +32,6 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
 
   useEffect(() => {
     const isFormValid: boolean = Object.values(registerData).every((value) => value !== '');
-    console.log('🚀 ~ file: RegisterModal.tsx:35 ~ useEffect ~ isFormValid:', isFormValid);
     if (isFormValid) setValidForm(true);
   }, [registerData]);
 
