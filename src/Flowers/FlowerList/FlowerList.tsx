@@ -7,22 +7,36 @@ interface Props {
   loading: boolean;
   flowers: Flower[];
   error: string | null;
-  addFlower: (flowerId: string) => void;
+  addEnabled: boolean;
+  addFlower: (flower: Flower) => void;
+  removeFlower: (flower: Flower) => void;
 }
 
-const FlowerList: React.FC<Props> = ({ loading, flowers, error, addFlower }) => {
+const FlowerList: React.FC<Props> = ({
+  loading,
+  flowers,
+  error,
+  addEnabled,
+  addFlower,
+  removeFlower,
+}) => {
   if (loading) return <Loader />;
   if (error) return <div>{error}</div>;
   if (!flowers.length) return <div>No flowers</div>;
 
-  const addToFavorites = (flowerId: string) => {
-    addFlower(flowerId);
+  const handleClick = (flower: Flower) => {
+    !!flower.favorite ? removeFlower(flower) : addFlower(flower);
   };
 
   let flowerCards: JSX.Element[] =
     flowers &&
     flowers.map((flower: Flower) => (
-      <FlowerCard key={flower.id} flower={flower} onClick={() => addToFavorites(flower.id)} />
+      <FlowerCard
+        key={flower.id}
+        flower={flower}
+        enabled={addEnabled}
+        onClick={() => handleClick(flower)}
+      />
     ));
 
   return <div className='flower-list'>{flowerCards}</div>;

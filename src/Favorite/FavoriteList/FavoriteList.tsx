@@ -3,7 +3,7 @@ import FlowerCard from '../../common/components/FlowerCard/FlowerCard';
 
 interface Props {
   flowers: FavoriteFlower[];
-  removeFlower: (flowerId: string, favoriteFlowerId: string) => void;
+  removeFlower: (favoriteFlower: FavoriteFlower) => void;
 }
 
 const FavoriteList: React.FC<Props> = ({ flowers, removeFlower }) => {
@@ -13,7 +13,8 @@ const FavoriteList: React.FC<Props> = ({ flowers, removeFlower }) => {
       <FlowerCard
         key={favoriteFlower.id}
         flower={favoriteFlower.flower}
-        onClick={() => removeFlower(favoriteFlower.flower.id, favoriteFlower.id)}
+        enabled={true}
+        onClick={() => removeFlower(favoriteFlower)}
       />
     ));
 

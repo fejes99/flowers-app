@@ -36,8 +36,9 @@ const Favorite: React.FC<Props> = ({
   if (error) return <div>{error}</div>;
   if (!flowers.length) return <div>No flowers</div>;
 
-  const removeFromFavorites = (flowerId: string, favoriteFlowerId: string) => {
-    if (user && user.token) onRemoveFavoriteFlower(user.token, flowerId, favoriteFlowerId);
+  const removeFromFavorites = (favoriteFlower: FavoriteFlower) => {
+    if (user && user.token)
+      onRemoveFavoriteFlower(user.token, favoriteFlower.flower.id, favoriteFlower.id);
   };
   return (
     <div>

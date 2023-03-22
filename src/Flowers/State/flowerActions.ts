@@ -92,11 +92,17 @@ const addFavoriteFlowerFail = (error: string) => ({
 
 export const addFavoriteFlower = (token: string, flowerId: string) => (dispatch: Dispatch) => {
   dispatch(addFavoriteFlowerRequest());
-  axios
+  return axios
     .post(`/flowers/${flowerId}/favorites`, {}, { headers: { Authorization: token } })
     .then((response) => dispatch(addFavoriteFlowerSuccess()))
     .catch((error) => dispatch(addFavoriteFlowerFail(error)));
 };
+
+export const addFavoriteFlowerAndFetchFavoriteFlowers =
+  (token: string, flowerId: string) => async (dispatch: any) => {
+    await dispatch(addFavoriteFlower(token, flowerId));
+    dispatch(fetchFavoriteFlowers(token));
+  };
 
 const removeFavoriteFlowerRequest = () => ({
   type: actionTypes.REMOVE_FAVORITE_FLOWER_REQUEST,
@@ -111,10 +117,10 @@ const removeFavoriteFlowerFail = (error: string) => ({
   error: error,
 });
 
-const removeFavoriteFlower =
+export const removeFavoriteFlower =
   (token: string, flowerId: string, favoriteFlowerId: string) => (dispatch: Dispatch) => {
     dispatch(removeFavoriteFlowerRequest());
-    axios
+    return axios
       .delete(`/flowers/${flowerId}/favorites/${favoriteFlowerId}`, {
         headers: { Authorization: token },
       })
@@ -125,6 +131,7 @@ const removeFavoriteFlower =
   };
 
 export const removeFavoriteFlowerAndFetchFavoriteFlowers =
-  (token: string, flowerId: string, favoriteFlowerId: string) => (dispatch: any) => {
-    dispatch(removeFavoriteFlower(token, flowerId, favoriteFlowerId));
+  (token: string, flowerId: string, favoriteFlowerId: string) => async (dispatch: any) => {
+    await dispatch(removeFavoriteFlower(token, flowerId, favoriteFlowerId));
+    dispatch(fetchFavoriteFlowers(token));
   };

@@ -5,11 +5,13 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 interface Props {
   flower: Flower;
+  enabled?: boolean;
   onClick?: () => void;
 }
 
 const FlowerCard: React.FC<Props> = ({
   flower: { name, latin_name, profile_picture, favorite },
+  enabled,
   onClick,
 }) => {
   const handleClick = () => {
@@ -19,11 +21,15 @@ const FlowerCard: React.FC<Props> = ({
   return (
     <div className='flower-card'>
       <img src={profile_picture} alt={name} className='flower-card-img' />
-      <div className='flower-card-name'>{name}</div>
-      <div className='flower-card-subname'>{latin_name}</div>
-      <button onClick={handleClick} className={`flower-card-favorite ${favorite ? 'red' : ''}`}>
-        {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-      </button>
+      <div className='flower-card-data'>
+        <div className='flower-card-name'>{name}</div>
+        <div className='flower-card-subname'>{latin_name}</div>
+      </div>
+      {enabled ? (
+        <button onClick={handleClick} className={`flower-card-favorite  ${favorite ? 'red' : ''}`}>
+          {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        </button>
+      ) : null}
     </div>
   );
 };
