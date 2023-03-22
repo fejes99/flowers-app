@@ -111,7 +111,7 @@ const removeFavoriteFlowerFail = (error: string) => ({
   error: error,
 });
 
-export const removeFavoriteFlower =
+const removeFavoriteFlower =
   (token: string, flowerId: string, favoriteFlowerId: string) => (dispatch: Dispatch) => {
     dispatch(removeFavoriteFlowerRequest());
     axios
@@ -120,7 +120,11 @@ export const removeFavoriteFlower =
       })
       .then((response) => {
         dispatch(removeFavoriteFlowerSuccess());
-        fetchFavoriteFlowers(token);
       })
       .catch((error) => dispatch(removeFavoriteFlowerFail(error)));
+  };
+
+export const removeFavoriteFlowerAndFetchFavoriteFlowers =
+  (token: string, flowerId: string, favoriteFlowerId: string) => (dispatch: any) => {
+    dispatch(removeFavoriteFlower(token, flowerId, favoriteFlowerId));
   };

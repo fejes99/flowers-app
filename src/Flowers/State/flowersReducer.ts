@@ -39,9 +39,9 @@ const flowersReducer: Reducer<FlowerState, actionTypes.FlowerActionTypes> = (
       return { ...state, favoriteFlowers: [] };
 
     case actionTypes.ADD_FAVORITE_FLOWER_REQUEST:
-      return { ...state, loading: true, error: null };
+      return { ...state, error: null };
     case actionTypes.ADD_FAVORITE_FLOWER_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state };
     case actionTypes.ADD_FAVORITE_FLOWER_FAIL:
       return { ...state, loading: false, error: action.error };
 
