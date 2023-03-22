@@ -1,18 +1,19 @@
 import { removeFavoriteFlowers } from './../../Flowers/State/flowerActions';
 import axios from 'axios';
-import { Dispatch } from 'redux';
 import { LoginData } from '../components/LoginModal/LoginModal';
 import { ProfileData } from '../components/ProfileModal/ProfileModal';
 import { RegisterData } from '../components/RegisterModal/RegisterModal';
 import * as actionTypes from './authTypes';
+import { Error } from '../../common/Error';
+import { AppDispatch } from '../../store/store';
 
 const registerUserRequest = () => ({ type: actionTypes.REGISTER_REQUEST });
 const registerUserSuccess = () => ({
   type: actionTypes.REGISTER_SUCCESS,
 });
-const registerUserFail = (error: string) => ({ type: actionTypes.REGISTER_FAIL, error: error });
+const registerUserFail = (error: Error) => ({ type: actionTypes.REGISTER_FAIL, error: error });
 
-export const registerUser = (registerData: RegisterData) => (dispatch: Dispatch) => {
+export const registerUser = (registerData: RegisterData) => (dispatch: AppDispatch) => {
   dispatch(registerUserRequest());
 
   axios
@@ -25,15 +26,18 @@ export const registerUser = (registerData: RegisterData) => (dispatch: Dispatch)
 
 const loginUserRequest = () => ({ type: actionTypes.LOGIN_REQUEST });
 const loginUserSuccess = (token: string) => ({ type: actionTypes.LOGIN_SUCCESS, token: token });
-const loginUserFail = (error: string) => ({ type: actionTypes.LOGIN_FAIL, error: error });
+const loginUserFail = (error: Error) => ({ type: actionTypes.LOGIN_FAIL, error: error });
 
-export const loginUser = (loginData: LoginData) => (dispatch: Dispatch) => {
+export const loginUser = (loginData: LoginData) => (dispatch: AppDispatch) => {
   dispatch(loginUserRequest());
 
   axios
     .post('/users/login', loginData)
     .then((response) => dispatch(loginUserSuccess(response.data.auth_token)))
-    .catch((error) => dispatch(loginUserFail(error)));
+    .catch((error) => {
+      console.log(error);
+      dispatch(loginUserFail(error));
+    });
 };
 
 const fetchUserRequest = () => ({ type: actionTypes.FETCH_USER_REQUEST });
@@ -41,9 +45,9 @@ const fetchUserSuccess = (profileData: ProfileData) => ({
   type: actionTypes.FETCH_USER_SUCCESS,
   data: profileData,
 });
-const fetchUserFail = (error: string) => ({ type: actionTypes.FETCH_USER_FAIL, payload: error });
+const fetchUserFail = (error: Error) => ({ type: actionTypes.FETCH_USER_FAIL, payload: error });
 
-export const fetchUser = (token: string) => (dispatch: Dispatch) => {
+export const fetchUser = (token: string) => (dispatch: AppDispatch) => {
   dispatch(fetchUserRequest());
 
   axios
@@ -54,7 +58,7 @@ export const fetchUser = (token: string) => (dispatch: Dispatch) => {
 
 const logout = () => ({ type: actionTypes.LOGOUT_USER });
 
-export const logoutUser = () => (dispatch: Dispatch) => {
-  removeFavoriteFlowers();
+export const logoutUser = () => (dispatch: AppDispatch) => {
+  dispatch(removeFavoriteFlowers());
   dispatch(logout());
 };
