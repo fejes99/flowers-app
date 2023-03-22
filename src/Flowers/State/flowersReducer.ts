@@ -1,7 +1,8 @@
 import { Reducer } from 'redux';
-import { Error } from '../../common/Error';
+
 import FlowerState from './flowerState';
 import * as actionTypes from './flowerTypes';
+import Error from '../../common/Error';
 
 const initialState: FlowerState = {
   flowers: [],

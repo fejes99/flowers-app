@@ -1,8 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router';
+
 import './App.css';
 import Flowers from './Flowers/Flowers';
 import Favorite from './Favorite/Favorite';
 import Navbar from './common/components/Navbar/Navbar';
+
 const App: React.FC = () => {
   return (
     <div className='App'>

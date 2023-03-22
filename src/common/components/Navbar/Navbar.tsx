@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import './Navbar.css';
+import { StoreState } from '../../../store/store';
+import User from '../../../auth/Auth';
 import NavbarItem, { NavbarItemProps } from './NavbarItem/NavbarItem';
 import useModal from '../../../auth/hooks/useModal';
 import ProfileModal from '../../../auth/components/ProfileModal/ProfileModal';
@@ -8,8 +11,6 @@ import LoginModal from '../../../auth/components/LoginModal/LoginModal';
 import RegisterModal from '../../../auth/components/RegisterModal/RegisterModal';
 import LoginSuccessModal from '../../../auth/components/LoginModal/SuccessModal/LoginSuccessModal';
 import RegisterSuccessModal from '../../../auth/components/RegisterModal/SuccessModal/RegisterSuccessModal';
-import User from '../../../auth/Auth';
-import { StoreState } from '../../../store/store';
 
 interface Props {
   user: User | null;

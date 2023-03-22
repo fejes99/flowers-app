@@ -7,11 +7,11 @@ import {
 } from 'redux';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 
-import FlowerState from '../Flowers/State/flowerState';
-import flowersReducer from '../Flowers/State/flowersReducer';
 import AuthState from '../auth/State/authState';
 import authReducer from '../auth/State/authReducer';
 import { AuthActionTypes } from '../auth/State/authTypes';
+import FlowerState from '../Flowers/State/flowerState';
+import flowersReducer from '../Flowers/State/flowersReducer';
 import { FlowerActionTypes } from '../Flowers/State/flowerTypes';
 
 export interface StoreState {

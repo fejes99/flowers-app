@@ -1,4 +1,4 @@
-import { Error } from '../../common/Error';
+import Error from '../../common/Error';
 import { Flower, FavoriteFlower } from '../Flowers.d';
 
 interface FlowerState {

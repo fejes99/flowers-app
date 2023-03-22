@@ -4,7 +4,7 @@ import { LoginData } from '../components/LoginModal/LoginModal';
 import { ProfileData } from '../components/ProfileModal/ProfileModal';
 import { RegisterData } from '../components/RegisterModal/RegisterModal';
 import * as actionTypes from './authTypes';
-import { Error } from '../../common/Error';
+import Error from '../../common/Error';
 import { AppDispatch } from '../../store/store';
 
 const registerUserRequest = () => ({ type: actionTypes.REGISTER_REQUEST });

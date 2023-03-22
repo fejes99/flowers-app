@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { Error } from '../../common/Error';
+
 import { AppDispatch } from '../../store/store';
-import { Flower, FavoriteFlower } from './../Flowers.d';
 import * as actionTypes from './flowerTypes';
+import { Flower, FavoriteFlower } from './../Flowers.d';
+import Error from '../../common/Error';
 
 const fetchFlowersRequest = () => ({
   type: actionTypes.FETCH_FLOWERS_REQUEST,

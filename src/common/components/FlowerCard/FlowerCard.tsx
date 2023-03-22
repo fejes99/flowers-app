@@ -1,7 +1,8 @@
-import './FlowerCard.css';
-import { Flower } from '../../../Flowers/Flowers.d';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+import './FlowerCard.css';
+import { Flower } from '../../../Flowers/Flowers.d';
 
 interface Props {
   flower: Flower;

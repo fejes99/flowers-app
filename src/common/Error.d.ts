@@ -1,4 +1,4 @@
-export interface Error {
+interface Error {
   message: string;
   name: string;
   stack: string;
@@ -37,3 +37,5 @@ interface Headers {
   Accept: string;
   'Content-Type': string;
 }
+
+export default Error;

@@ -1,8 +1,8 @@
 import './FlowerList.css';
 import { Flower } from '../Flowers.d';
-import FlowerCard from '../../common/components/FlowerCard/FlowerCard';
+import Error from '../../common/Error';
 import Loader from '../../common/components/Loader/Loader';
-import { Error } from '../../common/Error';
+import FlowerCard from '../../common/components/FlowerCard/FlowerCard';
 
 interface Props {
   loading: boolean;

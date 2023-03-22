@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Loader from '../../../../common/components/Loader/Loader';
-import { Error } from '../../../../common/Error';
+import Error from '../../../../common/Error';
 import { StoreState } from '../../../../store/store';
 import './LoginSuccessModal.css';
 

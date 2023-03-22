@@ -1,5 +1,5 @@
-import { Error } from '../../common/Error';
 import { Flower, FavoriteFlower } from '../Flowers.d';
+import Error from '../../common/Error';
 
 export const FETCH_FLOWERS_REQUEST = 'FETCH_FLOWERS_REQUEST';
 export const FETCH_FLOWERS_SUCCESS = 'FETCH_FLOWERS_SUCCESS';

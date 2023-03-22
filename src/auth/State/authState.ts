@@ -1,4 +1,4 @@
-import { Error } from '../../common/Error';
+import Error from '../../common/Error';
 import User from '../Auth.d';
 
 interface AuthState {

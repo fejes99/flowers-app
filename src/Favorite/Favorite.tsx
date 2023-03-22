@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import User from '../auth/Auth';
-import Loader from '../common/components/Loader/Loader';
-import { Error } from '../common/Error';
-import { FavoriteFlower } from '../Flowers/Flowers.d';
+
+import { AppDispatch, StoreState } from '../store/store';
 import {
   fetchFavoriteFlowers,
   removeFavoriteFlowerAndFetchFavoriteFlowers,
 } from '../Flowers/State/flowerActions';
-import { AppDispatch, StoreState } from '../store/store';
+import { FavoriteFlower } from '../Flowers/Flowers.d';
+import User from '../auth/Auth';
+import Loader from '../common/components/Loader/Loader';
+import Error from '../common/Error';
 import FavoriteList from './FavoriteList/FavoriteList';
 
 interface Props {

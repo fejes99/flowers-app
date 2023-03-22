@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { Error } from '../../common/Error';
+import Error from '../../common/Error';
 import AuthState from './authState';
 import * as actionTypes from './authTypes';
 

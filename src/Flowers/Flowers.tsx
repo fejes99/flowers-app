@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
-import './Flowers.css';
-import { FavoriteFlower, Flower } from './Flowers.d';
-import User from '../auth/Auth.d';
-import FlowerList from './FlowerList/FlowerList';
-import Search from '../common/components/Search/Search';
+import { useEffect } from 'react';
+
 import { AppDispatch, StoreState } from '../store/store';
 import {
   fetchFlowers,
@@ -11,8 +8,11 @@ import {
   addFavoriteFlowerAndFetchFavoriteFlowers,
   removeFavoriteFlowerAndFetchFavoriteFlowers,
 } from './State/flowerActions';
-import { useEffect } from 'react';
-import { Error } from '../common/Error';
+import { FavoriteFlower, Flower } from './Flowers.d';
+import User from '../auth/Auth.d';
+import Error from '../common/Error';
+import FlowerList from './FlowerList/FlowerList';
+import Search from '../common/components/Search/Search';
 
 interface Props {
   user?: User | null;
