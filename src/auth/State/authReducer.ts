@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import { Error } from '../../common/Error';
 import AuthState from './authState';
 import * as actionTypes from './authTypes';
 
@@ -21,7 +22,7 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
         loading: false,
       };
     case actionTypes.REGISTER_FAIL:
-      return { ...state, loading: false, error: action.error };
+      return { ...state, loading: false, error: action.error as Error };
 
     case actionTypes.LOGIN_REQUEST:
       return { ...state, loading: true, user: null, error: null };
@@ -35,7 +36,7 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
         },
       };
     case actionTypes.LOGIN_FAIL:
-      return { ...state, loading: false, error: action.error };
+      return { ...state, loading: false, error: action.error as Error };
 
     case actionTypes.FETCH_USER_REQUEST:
       return { ...state, loading: true, error: null };
@@ -50,7 +51,7 @@ const authReducer: Reducer<AuthState, actionTypes.AuthActionTypes> = (
         error: null,
       };
     case actionTypes.FETCH_USER_FAIL:
-      return { ...state, loading: false, error: action.error };
+      return { ...state, loading: false, error: action.error as Error };
 
     case actionTypes.LOGOUT_USER: {
       return { ...state, loading: false, user: null, error: null };

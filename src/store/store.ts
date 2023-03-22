@@ -19,7 +19,8 @@ export interface StoreState {
   auth: AuthState;
 }
 
-type StoreAction = FlowerActionTypes | AuthActionTypes;
+export type StoreAction = FlowerActionTypes | AuthActionTypes;
+export type AppDispatch = typeof store.dispatch;
 
 const rootReducer: Reducer<StoreState, StoreAction> = combineReducers<StoreState>({
   flowers: flowersReducer,

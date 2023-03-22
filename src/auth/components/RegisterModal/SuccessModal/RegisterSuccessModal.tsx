@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 import Loader from '../../../../common/components/Loader/Loader';
+import { Error } from '../../../../common/Error';
 import { StoreState } from '../../../../store/store';
 import './RegisterSuccessModal.css';
 
-type Props = {
+interface Props {
   show: boolean;
   loading: boolean;
-  error: any;
+  error: Error | null;
   onClose: () => void;
   onSuccess: () => void;
-};
+}
 
 const RegisterSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, onSuccess }) => {
   let renderModal = (

@@ -2,11 +2,12 @@ import './FlowerList.css';
 import { Flower } from '../Flowers.d';
 import FlowerCard from '../../common/components/FlowerCard/FlowerCard';
 import Loader from '../../common/components/Loader/Loader';
+import { Error } from '../../common/Error';
 
 interface Props {
   loading: boolean;
   flowers: Flower[];
-  error: string | null;
+  error: Error | null;
   addEnabled: boolean;
   addFlower: (flower: Flower) => void;
   removeFlower: (flower: Flower) => void;
@@ -21,7 +22,7 @@ const FlowerList: React.FC<Props> = ({
   removeFlower,
 }) => {
   if (loading) return <Loader />;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{error.message}</div>;
   if (!flowers.length) return <div>No flowers</div>;
 
   const handleClick = (flower: Flower) => {

@@ -4,6 +4,7 @@ import './RegisterModal.css';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import DatePicker from './DatePicker/DatePicker';
 import { registerUser } from '../../State/authActions';
+import { AppDispatch } from '../../../store/store';
 
 export interface RegisterData {
   email: string;
@@ -101,7 +102,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     onRegisterUser: (registerData: RegisterData) => dispatch(registerUser(registerData)),
   };

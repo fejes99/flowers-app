@@ -1,3 +1,5 @@
+import { ProfileData } from '../components/ProfileModal/ProfileModal';
+
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
@@ -23,7 +25,7 @@ interface RegisterSuccessAction {
 
 interface RegisterFailAction {
   type: typeof REGISTER_FAIL;
-  error: string;
+  error: Error;
 }
 
 interface LoginRequestAction {
@@ -37,7 +39,7 @@ interface LoginSuccessAction {
 
 interface LoginFailAction {
   type: typeof LOGIN_FAIL;
-  error: string;
+  error: Error;
 }
 
 interface FetchUserRequestAction {
@@ -46,12 +48,12 @@ interface FetchUserRequestAction {
 
 interface FetchUserSuccessAction {
   type: typeof FETCH_USER_SUCCESS;
-  data: any;
+  data: ProfileData;
 }
 
 interface FetchUserFailAction {
   type: typeof FETCH_USER_FAIL;
-  error: string;
+  error: Error;
 }
 
 interface LogoutUserAction {

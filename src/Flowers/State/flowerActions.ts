@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Dispatch } from 'redux';
+import { Error } from '../../common/Error';
+import { AppDispatch } from '../../store/store';
 import { Flower, FavoriteFlower } from './../Flowers.d';
 import * as actionTypes from './flowerTypes';
 
@@ -12,12 +13,12 @@ const fetchFlowersSuccess = (flowers: Flower[]) => ({
   flowers: flowers,
 });
 
-const fetchFlowersFail = (error: string) => ({
+const fetchFlowersFail = (error: Error) => ({
   type: actionTypes.FETCH_FLOWERS_FAIL,
   error: error,
 });
 
-export const fetchFlowers = () => (dispatch: Dispatch) => {
+export const fetchFlowers = () => (dispatch: AppDispatch) => {
   dispatch(fetchFlowersRequest());
   axios
     .get('/flowers')
@@ -34,12 +35,12 @@ const fetchSearchFlowersSuccess = (flowers: Flower[]) => ({
   flowers: flowers,
 });
 
-const fetchSearchFlowersFail = (error: string) => ({
+const fetchSearchFlowersFail = (error: Error) => ({
   type: actionTypes.FETCH_FLOWERS_FAIL,
   error: error,
 });
 
-export const fetchSearchFlowers = (query: string) => (dispatch: Dispatch) => {
+export const fetchSearchFlowers = (query: string) => (dispatch: AppDispatch) => {
   dispatch(fetchSearchFlowersRequest());
   axios
     .get('/flowers/search', { params: { query: query } })
@@ -56,12 +57,12 @@ const fetchFavoriteFlowersSuccess = (flowers: FavoriteFlower[]) => ({
   flowers: flowers,
 });
 
-const fetchFavoriteFlowersFail = (error: string) => ({
+const fetchFavoriteFlowersFail = (error: Error) => ({
   type: actionTypes.FETCH_FAVORITE_FLOWERS_FAIL,
   error: error,
 });
 
-export const fetchFavoriteFlowers = (token: string) => (dispatch: Dispatch) => {
+export const fetchFavoriteFlowers = (token: string) => (dispatch: AppDispatch) => {
   dispatch(fetchFavoriteFlowersRequest());
   axios
     .get('/flowers/favorites', { headers: { Authorization: token } })
@@ -73,7 +74,7 @@ const removeFavorite = () => ({
   type: actionTypes.REMOVE_FAVORITE_FLOWERS,
 });
 
-export const removeFavoriteFlowers = () => (dispatch: Dispatch) => {
+export const removeFavoriteFlowers = () => (dispatch: AppDispatch) => {
   dispatch(removeFavorite());
 };
 
@@ -85,12 +86,12 @@ const addFavoriteFlowerSuccess = () => ({
   type: actionTypes.ADD_FAVORITE_FLOWER_SUCCESS,
 });
 
-const addFavoriteFlowerFail = (error: string) => ({
+const addFavoriteFlowerFail = (error: Error) => ({
   type: actionTypes.ADD_FAVORITE_FLOWER_FAIL,
   error: error,
 });
 
-export const addFavoriteFlower = (token: string, flowerId: string) => (dispatch: Dispatch) => {
+export const addFavoriteFlower = (token: string, flowerId: string) => (dispatch: AppDispatch) => {
   dispatch(addFavoriteFlowerRequest());
   return axios
     .post(`/flowers/${flowerId}/favorites`, {}, { headers: { Authorization: token } })
@@ -99,7 +100,7 @@ export const addFavoriteFlower = (token: string, flowerId: string) => (dispatch:
 };
 
 export const addFavoriteFlowerAndFetchFavoriteFlowers =
-  (token: string, flowerId: string) => async (dispatch: any) => {
+  (token: string, flowerId: string) => async (dispatch: AppDispatch) => {
     await dispatch(addFavoriteFlower(token, flowerId));
     dispatch(fetchFavoriteFlowers(token));
   };
@@ -112,13 +113,13 @@ const removeFavoriteFlowerSuccess = () => ({
   type: actionTypes.REMOVE_FAVORITE_FLOWER_SUCCESS,
 });
 
-const removeFavoriteFlowerFail = (error: string) => ({
+const removeFavoriteFlowerFail = (error: Error) => ({
   type: actionTypes.REMOVE_FAVORITE_FLOWER_FAIL,
   error: error,
 });
 
 export const removeFavoriteFlower =
-  (token: string, flowerId: string, favoriteFlowerId: string) => (dispatch: Dispatch) => {
+  (token: string, flowerId: string, favoriteFlowerId: string) => (dispatch: AppDispatch) => {
     dispatch(removeFavoriteFlowerRequest());
     return axios
       .delete(`/flowers/${flowerId}/favorites/${favoriteFlowerId}`, {
@@ -131,7 +132,7 @@ export const removeFavoriteFlower =
   };
 
 export const removeFavoriteFlowerAndFetchFavoriteFlowers =
-  (token: string, flowerId: string, favoriteFlowerId: string) => async (dispatch: any) => {
+  (token: string, flowerId: string, favoriteFlowerId: string) => async (dispatch: AppDispatch) => {
     await dispatch(removeFavoriteFlower(token, flowerId, favoriteFlowerId));
     dispatch(fetchFavoriteFlowers(token));
   };

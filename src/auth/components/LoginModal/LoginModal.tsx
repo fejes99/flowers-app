@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './LoginModal.css';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import { loginUser } from '../../State/authActions';
+import { AppDispatch } from '../../../store/store';
 
 export interface LoginData {
   email: string;
@@ -68,11 +69,7 @@ const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) 
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {};
-// };
-
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     onLoginUser: (loginData: LoginData) => dispatch(loginUser(loginData)),
   };

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './ProfileModal.css';
 import User from '../../Auth';
-import { StoreState } from '../../../store/store';
+import { AppDispatch, StoreState } from '../../../store/store';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import { fetchUser, logoutUser } from '../../State/authActions';
 
@@ -57,7 +57,7 @@ const mapStateToProps = (state: StoreState) => {
   };
 };
 
-const mapDispatchToProps = () => (dispatch: any) => {
+const mapDispatchToProps = () => (dispatch: AppDispatch) => {
   return {
     onFetchUser: (token: string) => dispatch(fetchUser(token)),
     onLogoutUser: () => dispatch(logoutUser()),

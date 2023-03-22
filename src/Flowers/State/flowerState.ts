@@ -1,9 +1,10 @@
+import { Error } from '../../common/Error';
 import { Flower, FavoriteFlower } from '../Flowers.d';
 
 interface FlowerState {
   flowers: Flower[];
   loading: boolean;
-  error: string | null;
+  error: Error | null;
   favoriteFlowers: FavoriteFlower[];
 }
 

@@ -1,3 +1,4 @@
+import { Error } from '../../common/Error';
 import { Flower, FavoriteFlower } from '../Flowers.d';
 
 export const FETCH_FLOWERS_REQUEST = 'FETCH_FLOWERS_REQUEST';
@@ -33,7 +34,7 @@ interface FetchFlowersSuccessAction {
 
 interface FetchFlowersFailAction {
   type: typeof FETCH_FLOWERS_FAIL;
-  error: string;
+  error: Error;
 }
 
 interface FetchSearchFlowersRequestAction {
@@ -47,7 +48,7 @@ interface FetchSearchFlowersSuccessAction {
 
 interface FetchSearchFlowersFailAction {
   type: typeof FETCH_SEARCH_FLOWERS_FAIL;
-  error: string;
+  error: Error;
 }
 
 interface FetchFavoriteFlowersRequestAction {
@@ -61,7 +62,7 @@ interface FetchFavoriteFlowersSuccessAction {
 
 interface FetchFavoriteFlowersFailAction {
   type: typeof FETCH_FAVORITE_FLOWERS_FAIL;
-  error: string;
+  error: Error;
 }
 
 interface RemoveFavoriteFlowers {
@@ -78,7 +79,7 @@ interface AddFavoriteFlowerSuccess {
 
 interface AddFavoriteFlowerFail {
   type: typeof ADD_FAVORITE_FLOWER_FAIL;
-  error: string;
+  error: Error;
 }
 
 interface RemoveFavoriteFlowerRequest {
@@ -91,7 +92,7 @@ interface RemoveFavoriteFlowerSuccess {
 
 interface RemoveFavoriteFlowerFail {
   type: typeof REMOVE_FAVORITE_FLOWER_FAIL;
-  error: string;
+  error: Error;
 }
 
 export type FlowerActionTypes =

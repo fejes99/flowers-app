@@ -4,7 +4,7 @@ import { FavoriteFlower, Flower } from './Flowers.d';
 import User from '../auth/Auth.d';
 import FlowerList from './FlowerList/FlowerList';
 import Search from '../common/components/Search/Search';
-import { StoreState } from '../store/store';
+import { AppDispatch, StoreState } from '../store/store';
 import {
   fetchFlowers,
   fetchSearchFlowers,
@@ -12,13 +12,14 @@ import {
   removeFavoriteFlowerAndFetchFavoriteFlowers,
 } from './State/flowerActions';
 import { useEffect } from 'react';
+import { Error } from '../common/Error';
 
 interface Props {
   user?: User | null;
   flowers: Flower[];
   favoriteFlowers: FavoriteFlower[];
   loading: boolean;
-  error: string | null;
+  error: Error | null;
   onFetchFlowers: () => void;
   onAddFavoriteFlower: (token: string, flowerId: string) => void;
   onRemoveFavoriteFlower: (token: string, flowerId: string, favoriteFlowerId: string) => void;
@@ -101,7 +102,7 @@ const mapStateToProps = (state: StoreState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onFetchFlowers: () => dispatch(fetchFlowers()),
   onAddFavoriteFlower: (token: string, flowerId: string) =>
     dispatch(addFavoriteFlowerAndFetchFavoriteFlowers(token, flowerId)),
