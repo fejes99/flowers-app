@@ -1,4 +1,4 @@
-import { Flower, FavoriteFlower } from '../Flowers.d';
+import { Flower, FavoriteFlower, FlowerPagination } from '../Flowers.d';
 import Error from '../../common/Error';
 
 export const FETCH_FLOWERS_REQUEST = 'FETCH_FLOWERS_REQUEST';
@@ -30,6 +30,7 @@ interface FetchFlowersRequestAction {
 interface FetchFlowersSuccessAction {
   type: typeof FETCH_FLOWERS_SUCCESS;
   flowers: Flower[];
+  pagination: FlowerPagination;
 }
 
 interface FetchFlowersFailAction {

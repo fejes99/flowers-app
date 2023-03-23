@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { AppDispatch, StoreState } from '../store/store';
 import {
@@ -8,7 +8,7 @@ import {
   addFavoriteFlowerAndFetchFavoriteFlowers,
   removeFavoriteFlowerAndFetchFavoriteFlowers,
 } from './State/flowerActions';
-import { FavoriteFlower, Flower } from './Flowers.d';
+import { FavoriteFlower, Flower, FlowerPagination } from './Flowers.d';
 import User from '../auth/Auth.d';
 import Error from '../common/Error';
 import FlowerList from './FlowerList/FlowerList';
@@ -16,12 +16,13 @@ import Search from '../common/components/Search/Search';
 import Pagination from '../common/components/Pagination/Pagination';
 
 interface Props {
-  user?: User | null;
+  user: User | null;
   flowers: Flower[];
   favoriteFlowers: FavoriteFlower[];
+  pagination: FlowerPagination | null;
   loading: boolean;
   error: Error | null;
-  onFetchFlowers: () => void;
+  onFetchFlowers: (page: number) => void;
   onAddFavoriteFlower: (token: string, flowerId: string) => void;
   onRemoveFavoriteFlower: (token: string, flowerId: string, favoriteFlowerId: string) => void;
   onFetchSearchFlowers: (query: string) => void;
@@ -31,6 +32,7 @@ const Flowers: React.FC<Props> = ({
   user,
   flowers,
   favoriteFlowers,
+  pagination,
   loading,
   error,
   onFetchFlowers,
@@ -38,9 +40,15 @@ const Flowers: React.FC<Props> = ({
   onRemoveFavoriteFlower,
   onFetchSearchFlowers,
 }) => {
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    onFetchFlowers();
-  }, [onFetchFlowers]);
+    onFetchFlowers(page);
+  }, [onFetchFlowers, page]);
+
+  useEffect(() => {
+    pagination && setPage(pagination.current_page);
+  }, [pagination]);
 
   const addFlower = (flower: Flower) => {
     if (user && user.token && !flower.favorite) onAddFavoriteFlower(user.token, flower.id);
@@ -82,7 +90,11 @@ const Flowers: React.FC<Props> = ({
     <div>
       <Search onChange={onFetchSearchFlowers} />
       <div className='main'>
-        <Pagination />
+        <Pagination
+          pagination={pagination}
+          prevPage={() => pagination?.prev_page && setPage(pagination.prev_page)}
+          nextPage={() => pagination?.next_page && setPage(pagination?.next_page)}
+        />
         <FlowerList
           loading={loading}
           flowers={updatedFlowers}
@@ -101,13 +113,14 @@ const mapStateToProps = (state: StoreState) => {
     user: state.auth.user,
     flowers: state.flowers.flowers,
     favoriteFlowers: state.flowers.favoriteFlowers,
+    pagination: state.flowers.pagination,
     loading: state.flowers.loading,
     error: state.flowers.error,
   };
 };
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  onFetchFlowers: () => dispatch(fetchFlowers()),
+  onFetchFlowers: (page: number) => dispatch(fetchFlowers(page)),
   onAddFavoriteFlower: (token: string, flowerId: string) =>
     dispatch(addFavoriteFlowerAndFetchFavoriteFlowers(token, flowerId)),
   onRemoveFavoriteFlower: (token: string, flowerId: string, favoriteFlowerId: string) =>

@@ -5,6 +5,7 @@ import User from '../../Auth';
 import { AppDispatch, StoreState } from '../../../store/store';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import { fetchUser, logoutUser } from '../../State/authActions';
+import Button from '../../../common/components/Button/Button';
 
 export interface ProfileData {
   first_name: string;
@@ -43,9 +44,9 @@ const ProfileModal: React.FC<Props> = ({ show, user, onClose, onFetchUser, onLog
           <label>Last Name:</label>
           <span>{user?.data?.last_name}</span>
         </div>
-        <button className='profile-modal-logout-button' onClick={handleLogout}>
+        <Button disabled={false} onClick={handleLogout}>
           Logout
-        </button>
+        </Button>
       </div>
     </div>
   );

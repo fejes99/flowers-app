@@ -9,6 +9,7 @@ const initialState: FlowerState = {
   loading: false,
   error: null,
   favoriteFlowers: [],
+  pagination: null,
 };
 
 const flowersReducer: Reducer<FlowerState, actionTypes.FlowerActionTypes> = (
@@ -19,7 +20,7 @@ const flowersReducer: Reducer<FlowerState, actionTypes.FlowerActionTypes> = (
     case actionTypes.FETCH_FLOWERS_REQUEST:
       return { ...state, loading: true, flowers: [], error: null };
     case actionTypes.FETCH_FLOWERS_SUCCESS:
-      return { ...state, loading: false, flowers: action.flowers };
+      return { ...state, loading: false, flowers: action.flowers, pagination: action.pagination };
     case actionTypes.FETCH_FLOWERS_FAIL:
       return { ...state, loading: false, error: action.error as Error };
 

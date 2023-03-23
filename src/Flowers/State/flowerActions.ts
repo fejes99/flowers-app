@@ -2,16 +2,17 @@ import axios from 'axios';
 
 import { AppDispatch } from '../../store/store';
 import * as actionTypes from './flowerTypes';
-import { Flower, FavoriteFlower } from './../Flowers.d';
+import { Flower, FavoriteFlower, FetchFlowersData } from './../Flowers.d';
 import Error from '../../common/Error';
 
 const fetchFlowersRequest = () => ({
   type: actionTypes.FETCH_FLOWERS_REQUEST,
 });
 
-const fetchFlowersSuccess = (flowers: Flower[]) => ({
+const fetchFlowersSuccess = (fetchFlowersData: FetchFlowersData) => ({
   type: actionTypes.FETCH_FLOWERS_SUCCESS,
-  flowers: flowers,
+  flowers: fetchFlowersData.flowers,
+  pagination: fetchFlowersData.meta.pagination,
 });
 
 const fetchFlowersFail = (error: Error) => ({
@@ -19,14 +20,11 @@ const fetchFlowersFail = (error: Error) => ({
   error: error,
 });
 
-export const fetchFlowers = () => (dispatch: AppDispatch) => {
+export const fetchFlowers = (page: number) => (dispatch: AppDispatch) => {
   dispatch(fetchFlowersRequest());
   axios
-    .get('/flowers')
-    .then((response) => {
-      console.log(response.data.meta.pagination);
-      dispatch(fetchFlowersSuccess(response.data.flowers));
-    })
+    .get('/flowers', { params: { page: page } })
+    .then((response) => dispatch(fetchFlowersSuccess(response.data)))
     .catch((error) => dispatch(fetchFlowersFail(error.message)));
 };
 

@@ -5,6 +5,7 @@ import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import DatePicker from './DatePicker/DatePicker';
 import { registerUser } from '../../State/authActions';
 import { AppDispatch } from '../../../store/store';
+import Button from '../../../common/components/Button/Button';
 
 export interface RegisterData {
   email: string;
@@ -47,8 +48,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
     setRegisterData({ ...registerData, date_of_birth: date });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleSubmit = (): void => {
     if (validForm) {
       onRegisterUser(registerData);
       onClose();
@@ -59,7 +59,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
   return (
     <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
       <div className='register-modal' onClick={(event) => event.stopPropagation()}>
-        <form className='register-modal-form' onSubmit={handleSubmit}>
+        <div className='register-modal-form'>
           <h2 className='register-modal-title'>Create an Account</h2>
           <div className='register-modal-row'>
             <label>First Name:</label>
@@ -93,10 +93,10 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
             <label>Date of Birth:</label>
             <DatePicker onDateChange={handleDateChange} />
           </div>
-          <button className='register-modal-submit-button' type='submit' disabled={!validForm}>
+          <Button disabled={!validForm} onClick={handleSubmit}>
             Create Account
-          </button>
-        </form>
+          </Button>
+        </div>
       </div>
     </div>
   );

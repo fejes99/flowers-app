@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import Button from '../../../../common/components/Button/Button';
 import Loader from '../../../../common/components/Loader/Loader';
 import Error from '../../../../common/Error';
 import { StoreState } from '../../../../store/store';
@@ -18,9 +19,9 @@ const RegisterSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, 
       <h2 className='register-success-modal-title'>
         Congratulations! You have successfully signed up!
       </h2>
-      <button className='register-success-modal-submit-button' onClick={onSuccess}>
-        Ok
-      </button>
+      <Button disabled={false} onClick={onSuccess}>
+        OK
+      </Button>
     </>
   );
 

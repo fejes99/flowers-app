@@ -4,6 +4,7 @@ import './LoginModal.css';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import { loginUser } from '../../State/authActions';
 import { AppDispatch } from '../../../store/store';
+import Button from '../../../common/components/Button/Button';
 
 export interface LoginData {
   email: string;
@@ -36,8 +37,7 @@ const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) 
     setLoginData({ ...loginData, [name]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleSubmit = (): void => {
     if (validForm) {
       onLoginUser(loginData);
       onClose();
@@ -48,7 +48,7 @@ const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) 
   return (
     <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
       <div className='login-modal' onClick={(event) => event.stopPropagation()}>
-        <form className='login-modal-form' onSubmit={handleSubmit}>
+        <div className='login-modal-form'>
           <h2 className='login-modal-title'>Login</h2>
           <div className='login-modal-row'>
             <label>Email:</label>
@@ -68,10 +68,10 @@ const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) 
               onChange={handleInputChange}
             />
           </div>
-          <button className='login-modal-submit-button' type='submit' disabled={!validForm}>
+          <Button disabled={!validForm} onClick={handleSubmit}>
             Login
-          </button>
-        </form>
+          </Button>
+        </div>
       </div>
     </div>
   );
