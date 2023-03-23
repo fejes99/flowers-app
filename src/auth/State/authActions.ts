@@ -1,4 +1,4 @@
-import { removeFavoriteFlowers } from './../../Flowers/State/flowerActions';
+import { fetchFavoriteFlowers, removeFavoriteFlowers } from './../../Flowers/State/flowerActions';
 import axios from 'axios';
 import { LoginData } from '../components/LoginModal/LoginModal';
 import { ProfileData } from '../components/ProfileModal/ProfileModal';
@@ -52,7 +52,10 @@ export const fetchUser = (token: string) => (dispatch: AppDispatch) => {
 
   axios
     .get('/users/me', { headers: { Authorization: token } })
-    .then((response) => dispatch(fetchUserSuccess(response.data.user)))
+    .then((response) => {
+      dispatch(fetchUserSuccess(response.data.user));
+      dispatch(fetchFavoriteFlowers(token));
+    })
     .catch((error) => dispatch(fetchUserFail(error)));
 };
 

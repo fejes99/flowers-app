@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import './LoginModal.css';
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
@@ -18,10 +18,16 @@ type Props = {
 };
 
 const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) => {
+  const [validForm, setValidForm] = useState(false);
   const [loginData, setLoginData] = useState<LoginData>({
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    const isFormValid: boolean = Object.values(loginData).every((value) => value !== '');
+    if (isFormValid) setValidForm(true);
+  }, [loginData]);
 
   useOnEscapeKey(onClose);
 
@@ -32,9 +38,11 @@ const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    onLoginUser(loginData);
-    onClose();
-    onSuccess();
+    if (validForm) {
+      onLoginUser(loginData);
+      onClose();
+      onSuccess();
+    }
   };
 
   return (
@@ -60,7 +68,7 @@ const LoginModal: React.FC<Props> = ({ show, onClose, onSuccess, onLoginUser }) 
               onChange={handleInputChange}
             />
           </div>
-          <button className='login-modal-submit-button' type='submit'>
+          <button className='login-modal-submit-button' type='submit' disabled={!validForm}>
             Login
           </button>
         </form>

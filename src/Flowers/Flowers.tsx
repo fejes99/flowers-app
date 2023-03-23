@@ -13,6 +13,7 @@ import User from '../auth/Auth.d';
 import Error from '../common/Error';
 import FlowerList from './FlowerList/FlowerList';
 import Search from '../common/components/Search/Search';
+import Pagination from '../common/components/Pagination/Pagination';
 
 interface Props {
   user?: User | null;
@@ -78,16 +79,19 @@ const Flowers: React.FC<Props> = ({
   const updatedFlowers = filterFavoriteFlowers(flowers, favoriteFlowers);
 
   return (
-    <div className='flowers-container'>
+    <div>
       <Search onChange={onFetchSearchFlowers} />
-      <FlowerList
-        loading={loading}
-        flowers={updatedFlowers}
-        error={error}
-        addEnabled={!!user}
-        addFlower={addFlower}
-        removeFlower={removeFlower}
-      />
+      <div className='main'>
+        <Pagination />
+        <FlowerList
+          loading={loading}
+          flowers={updatedFlowers}
+          error={error}
+          addEnabled={!!user}
+          addFlower={addFlower}
+          removeFlower={removeFlower}
+        />
+      </div>
     </div>
   );
 };

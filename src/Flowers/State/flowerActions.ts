@@ -23,7 +23,10 @@ export const fetchFlowers = () => (dispatch: AppDispatch) => {
   dispatch(fetchFlowersRequest());
   axios
     .get('/flowers')
-    .then((response) => dispatch(fetchFlowersSuccess(response.data.flowers)))
+    .then((response) => {
+      console.log(response.data.meta.pagination);
+      dispatch(fetchFlowersSuccess(response.data.flowers));
+    })
     .catch((error) => dispatch(fetchFlowersFail(error.message)));
 };
 
