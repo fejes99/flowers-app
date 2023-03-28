@@ -8,7 +8,6 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({ children, disabled, onClick }) => {
-  console.log('🚀 ~ file: Button.tsx:11 ~ disabled:', disabled);
   return (
     <button className='button' onClick={onClick} disabled={disabled}>
       {children}

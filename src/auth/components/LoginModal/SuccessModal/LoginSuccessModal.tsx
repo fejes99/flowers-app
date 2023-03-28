@@ -3,7 +3,6 @@ import Button from '../../../../common/components/Button/Button';
 import Loader from '../../../../common/components/Loader/Loader';
 import Error from '../../../../common/Error';
 import { StoreState } from '../../../../store/store';
-import './LoginSuccessModal.css';
 
 interface Props {
   show: boolean;
@@ -16,10 +15,8 @@ interface Props {
 const LoginSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, onProfile }) => {
   let renderModal = (
     <>
-      <h2 className='login-success-modal-title'>
-        Congratulations! You have successfully logged in!
-      </h2>
-      <div className='login-success-modal-row'>
+      <h2 className='modal-title'>Congratulations! You have successfully logged in!</h2>
+      <div className='modal-center-row'>
         <Button disabled={false} onClick={onProfile}>
           Profile
         </Button>
@@ -34,7 +31,7 @@ const LoginSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, onP
   if (error)
     renderModal = (
       <>
-        <h2 className='login-success-modal-title'>Error! Try again.</h2>
+        <h2 className='modal-title'>{error.message}</h2>
         <button className='modal-close-button' onClick={onClose}>
           Close
         </button>
@@ -42,8 +39,8 @@ const LoginSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, onP
     );
 
   return (
-    <div className={`modal ${show ? 'show' : ''}`}>
-      <div className='login-success-modal' onClick={(event) => event.stopPropagation()}>
+    <div className={`modal-container ${show ? 'show' : ''}`}>
+      <div className='modal' onClick={(event) => event.stopPropagation()}>
         {renderModal}
       </div>
     </div>

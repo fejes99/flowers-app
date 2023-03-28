@@ -18,9 +18,7 @@ export const registerUser = (registerData: RegisterData) => (dispatch: AppDispat
 
   axios
     .post('/users/register', registerData)
-    .then((response) => {
-      dispatch(registerUserSuccess());
-    })
+    .then((response) => dispatch(registerUserSuccess()))
     .catch((error) => dispatch(registerUserFail(error)));
 };
 

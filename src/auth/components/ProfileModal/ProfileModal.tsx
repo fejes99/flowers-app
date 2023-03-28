@@ -33,9 +33,9 @@ const ProfileModal: React.FC<Props> = ({ show, user, onClose, onFetchUser, onLog
   };
 
   return (
-    <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
+    <div className={`modal-container ${show ? 'show' : ''}`} onClick={onClose}>
       <div className='profile-modal' onClick={(event) => event.stopPropagation()}>
-        <h2 className='profile-modal-title'>Profile</h2>
+        <h2 className='modal-title'>Profile</h2>
         <div className='profile-modal-row'>
           <label>First Name:</label>
           <span>{user?.data?.first_name}</span>

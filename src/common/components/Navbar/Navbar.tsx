@@ -35,20 +35,20 @@ const Navbar: React.FC<Props> = ({ user }) => {
     {
       name: 'Flowers',
       url: '/flowers',
-      onClick: undefined,
-    },
-    {
-      name: 'Favorite',
-      url: '/favorite',
-      onClick: undefined,
     },
   ];
 
   if (user !== null) {
-    navbarItems.push({
-      name: `${user.data?.first_name} ${user.data?.last_name}`,
-      onClick: openProfileModal,
-    });
+    navbarItems.push(
+      {
+        name: 'Favorite',
+        url: '/favorite',
+      },
+      {
+        name: `${user.data?.first_name} ${user.data?.last_name}`,
+        onClick: openProfileModal,
+      }
+    );
   } else {
     navbarItems.push(
       {
@@ -63,32 +63,34 @@ const Navbar: React.FC<Props> = ({ user }) => {
   }
 
   return (
-    <div className='navbar'>
-      <div className='navbar-nav'>
-        {navbarItems.map((item: NavbarItemProps) => (
-          <NavbarItem key={item.name} {...item} />
-        ))}
-        <ProfileModal show={showProfileModal} onClose={closeAllModals} />
-        <LoginModal
-          show={showLoginModal}
-          onClose={closeAllModals}
-          onSuccess={openLoginSuccessModal}
-        />
-        <LoginSuccessModal
-          show={showLoginSuccessModal}
-          onClose={closeAllModals}
-          onProfile={openProfileModal}
-        />
-        <RegisterModal
-          show={showRegisterModal}
-          onClose={closeAllModals}
-          onSuccess={openRegisterSuccessModal}
-        />
-        <RegisterSuccessModal
-          show={showRegisterSuccessModal}
-          onClose={closeAllModals}
-          onSuccess={openLoginModal}
-        />
+    <div className='navbar-container'>
+      <div className='navbar'>
+        <div className='navbar-nav'>
+          {navbarItems.map((item: NavbarItemProps) => (
+            <NavbarItem key={item.name} {...item} />
+          ))}
+          <RegisterModal
+            show={showRegisterModal}
+            onClose={closeAllModals}
+            onSuccess={openRegisterSuccessModal}
+          />
+          <RegisterSuccessModal
+            show={showRegisterSuccessModal}
+            onClose={closeAllModals}
+            onSuccess={openLoginModal}
+          />
+          <LoginModal
+            show={showLoginModal}
+            onClose={closeAllModals}
+            onSuccess={openLoginSuccessModal}
+          />
+          <LoginSuccessModal
+            show={showLoginSuccessModal}
+            onClose={closeAllModals}
+            onProfile={openProfileModal}
+          />
+          <ProfileModal show={showProfileModal} onClose={closeAllModals} />
+        </div>
       </div>
     </div>
   );

@@ -2,11 +2,11 @@ import { FlowerPagination } from '../../../Flowers/Flowers.d';
 import Button from '../Button/Button';
 import './Pagination.css';
 
-type Props = {
+interface Props {
   pagination: FlowerPagination | null;
   prevPage: () => void;
   nextPage: () => void;
-};
+}
 
 const Pagination: React.FC<Props> = ({ pagination, prevPage, nextPage }) => {
   if (!pagination) return null;

@@ -1,3 +1,7 @@
+.navbar-container {
+  background-color: blanchedalmond;
+}
+
 .navbar {
   display: flex;
   justify-content: flex-end;

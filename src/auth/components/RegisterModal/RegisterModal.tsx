@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import './RegisterModal.css';
+import isEmail from 'validator/lib/isEmail';
+
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import DatePicker from './DatePicker/DatePicker';
 import { registerUser } from '../../State/authActions';
@@ -15,15 +16,16 @@ export interface RegisterData {
   date_of_birth: string;
 }
 
-type Props = {
+interface Props {
   show: boolean;
   onClose: () => void;
   onSuccess: () => void;
   onRegisterUser: (registerData: RegisterData) => void;
-};
+}
 
 const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUser }) => {
   const [validForm, setValidForm] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
   const [registerData, setRegisterData] = useState<RegisterData>({
     email: '',
     password: '',
@@ -32,16 +34,26 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
     date_of_birth: '',
   });
 
+  const validateEmail = (email: string) => {
+    const isValidEmail = isEmail(email);
+    setValidEmail(isValidEmail);
+  };
+
   useEffect(() => {
     const isFormValid: boolean = Object.values(registerData).every((value) => value !== '');
-    if (isFormValid) setValidForm(true);
-  }, [registerData]);
+    if (isFormValid && validEmail) setValidForm(true);
+    else setValidForm(false);
+  }, [registerData, validEmail]);
 
   useOnEscapeKey(onClose);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
     setRegisterData({ ...registerData, [name]: value });
+
+    if (name === 'email') {
+      validateEmail(value);
+    }
   };
 
   const handleDateChange = (date: string): void => {
@@ -49,7 +61,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
   };
 
   const handleSubmit = (): void => {
-    if (validForm) {
+    if (validForm && validEmail) {
       onRegisterUser(registerData);
       onClose();
       onSuccess();
@@ -57,28 +69,29 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
   };
 
   return (
-    <div className={`modal ${show ? 'show' : ''}`} onClick={onClose}>
-      <div className='register-modal' onClick={(event) => event.stopPropagation()}>
-        <div className='register-modal-form'>
-          <h2 className='register-modal-title'>Create an Account</h2>
-          <div className='register-modal-row'>
+    <div className={`modal-container ${show ? 'show' : ''}`} onClick={onClose}>
+      <div className='modal' onClick={(event) => event.stopPropagation()}>
+        <div className='modal-form'>
+          <h2 className='modal-title'>Create an Account</h2>
+          <div className='modal-row'>
             <label>First Name:</label>
             <input name='first_name' value={registerData.first_name} onChange={handleInputChange} />
           </div>
-          <div className='register-modal-row'>
+          <div className='modal-row'>
             <label>Last Name:</label>
             <input name='last_name' value={registerData.last_name} onChange={handleInputChange} />
           </div>
-          <div className='register-modal-row'>
+          <div className='modal-row'>
             <label>Email:</label>
             <input
               name='email'
               type={'email'}
               value={registerData.email}
               onChange={handleInputChange}
+              className={validEmail ? 'valid' : 'invalid'}
             />
           </div>
-          <div className='register-modal-row'>
+          <div className='modal-row'>
             <label>Password:</label>
             <input
               name='password'
@@ -89,7 +102,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
               title='Password must have a minimum length of 6 characters'
             />
           </div>
-          <div className='register-modal-row'>
+          <div className='modal-row'>
             <label>Date of Birth:</label>
             <DatePicker onDateChange={handleDateChange} />
           </div>

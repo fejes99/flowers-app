@@ -9,20 +9,10 @@ export interface NavbarItemProps {
   onClick?: () => void;
 }
 
-const NavbarItem: React.FC<NavbarItemProps> = ({ name, url, onClick }) => {
-  let item = (
-    <div className='navbar-item' onClick={onClick}>
-      <span>{name}</span>
-    </div>
-  );
-  if (url)
-    item = (
-      <div className='navbar-item' onClick={onClick}>
-        <NavLink to={url}>{name}</NavLink>
-      </div>
-    );
-
-  return item;
-};
+const NavbarItem: React.FC<NavbarItemProps> = ({ name, url, onClick }) => (
+  <div className='navbar-item' onClick={onClick}>
+    {url ? <NavLink to={url}>{name}</NavLink> : <span>{name}</span>}
+  </div>
+);
 
 export default NavbarItem;

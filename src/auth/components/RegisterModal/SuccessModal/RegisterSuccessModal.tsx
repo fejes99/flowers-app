@@ -3,7 +3,6 @@ import Button from '../../../../common/components/Button/Button';
 import Loader from '../../../../common/components/Loader/Loader';
 import Error from '../../../../common/Error';
 import { StoreState } from '../../../../store/store';
-import './RegisterSuccessModal.css';
 
 interface Props {
   show: boolean;
@@ -16,9 +15,7 @@ interface Props {
 const RegisterSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, onSuccess }) => {
   let renderModal = (
     <>
-      <h2 className='register-success-modal-title'>
-        Congratulations! You have successfully signed up!
-      </h2>
+      <h2 className='modal-title'>Congratulations! You have successfully signed up!</h2>
       <Button disabled={false} onClick={onSuccess}>
         OK
       </Button>
@@ -29,16 +26,16 @@ const RegisterSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, 
   if (error)
     renderModal = (
       <>
-        <h2 className='register-success-modal-title'>Error! Try again.</h2>
-        <button className='modal-close-button' onClick={onClose}>
+        <h2 className='modal-title'>{error.message}</h2>
+        <Button disabled={false} onClick={onClose}>
           Close
-        </button>
+        </Button>
       </>
     );
 
   return (
-    <div className={`modal ${show ? 'show' : ''}`}>
-      <div className='register-success-modal' onClick={(event) => event.stopPropagation()}>
+    <div className={`modal-container ${show ? 'show' : ''}`}>
+      <div className='modal' onClick={(event) => event.stopPropagation()}>
         {renderModal}
       </div>
     </div>
