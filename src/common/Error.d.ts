@@ -5,6 +5,7 @@ interface Error {
   config: Config;
   code: string;
   status: number;
+  response: any;
 }
 
 interface Config {

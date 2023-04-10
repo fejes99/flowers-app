@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import isEmail from 'validator/lib/isEmail';
 
 import { useOnEscapeKey } from '../../hooks/useCloseOnEscapeKey';
 import DatePicker from './DatePicker/DatePicker';
@@ -25,7 +24,7 @@ interface Props {
 
 const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUser }) => {
   const [validForm, setValidForm] = useState(false);
-  const [validEmail, setValidEmail] = useState(false);
+  const [validEmail, setValidEmail] = useState(true);
   const [registerData, setRegisterData] = useState<RegisterData>({
     email: '',
     password: '',
@@ -35,7 +34,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
   });
 
   const validateEmail = (email: string) => {
-    const isValidEmail = isEmail(email);
+    const isValidEmail = /\S+@\S+\.\S+/.test(email);
     setValidEmail(isValidEmail);
   };
 
@@ -106,7 +105,7 @@ const RegisterModal: React.FC<Props> = ({ show, onClose, onSuccess, onRegisterUs
             <label>Date of Birth:</label>
             <DatePicker onDateChange={handleDateChange} />
           </div>
-          <Button disabled={!validForm} onClick={handleSubmit}>
+          <Button type='success' disabled={!validForm} onClick={handleSubmit}>
             Create Account
           </Button>
         </div>

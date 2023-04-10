@@ -13,10 +13,10 @@ const Pagination: React.FC<Props> = ({ pagination, prevPage, nextPage }) => {
 
   return (
     <div className='pagination'>
-      <Button disabled={!pagination?.prev_page} onClick={prevPage}>
+      <Button type='success' disabled={!pagination?.prev_page} onClick={prevPage}>
         Prev
       </Button>
-      <Button disabled={!pagination?.next_page} onClick={nextPage}>
+      <Button type='success' disabled={!pagination?.next_page} onClick={nextPage}>
         Next
       </Button>
     </div>

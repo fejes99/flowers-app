@@ -32,7 +32,10 @@ export const loginUser = (loginData: LoginData) => (dispatch: AppDispatch) => {
   axios
     .post('/users/login', loginData)
     .then((response) => dispatch(loginUserSuccess(response.data.auth_token)))
-    .catch((error) => dispatch(loginUserFail(error)));
+    .catch((error) => {
+      dispatch(loginUserFail(error));
+      console.log(error.response.data.error);
+    });
 };
 
 const fetchUserRequest = () => ({ type: actionTypes.FETCH_USER_REQUEST });

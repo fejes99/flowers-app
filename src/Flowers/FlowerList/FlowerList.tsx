@@ -22,7 +22,7 @@ const FlowerList: React.FC<Props> = ({
   removeFlower,
 }) => {
   if (loading) return <Loader />;
-  if (error) return <div>{error.message}</div>;
+  if (error) return <div>{error.response.data.error}</div>;
   if (!flowers.length) return <div>No flowers</div>;
 
   const handleClick = (flower: Flower) => {

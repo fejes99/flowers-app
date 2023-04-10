@@ -16,7 +16,7 @@ const RegisterSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, 
   let renderModal = (
     <>
       <h2 className='modal-title'>Congratulations! You have successfully signed up!</h2>
-      <Button disabled={false} onClick={onSuccess}>
+      <Button type='success' disabled={false} onClick={onSuccess}>
         OK
       </Button>
     </>
@@ -26,8 +26,8 @@ const RegisterSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, 
   if (error)
     renderModal = (
       <>
-        <h2 className='modal-title'>{error.message}</h2>
-        <Button disabled={false} onClick={onClose}>
+        <h2 className='modal-title'>{error.response.data.error}</h2>
+        <Button type='fail' disabled={false} onClick={onClose}>
           Close
         </Button>
       </>

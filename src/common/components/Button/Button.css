@@ -25,3 +25,30 @@
   background-color: rgb(38, 40, 40);
   cursor: not-allowed;
 }
+
+.button-fail {
+  background-color: red;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15px;
+  width: 170px;
+  margin-top: 20px;
+}
+
+.button-fail:hover {
+  background-color: rgb(165, 1, 1);
+}
+
+.button-fail:disabled {
+  background-color: rgb(50, 53, 53);
+  cursor: not-allowed;
+}
+
+.button-fail:disabled:hover {
+  background-color: rgb(38, 40, 40);
+  cursor: not-allowed;
+}

@@ -17,10 +17,10 @@ const LoginSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, onP
     <>
       <h2 className='modal-title'>Congratulations! You have successfully logged in!</h2>
       <div className='modal-center-row'>
-        <Button disabled={false} onClick={onProfile}>
+        <Button type='success' disabled={false} onClick={onProfile}>
           Profile
         </Button>
-        <Button disabled={false} onClick={onClose}>
+        <Button type='success' disabled={false} onClick={onClose}>
           OK
         </Button>
       </div>
@@ -31,10 +31,10 @@ const LoginSuccessModal: React.FC<Props> = ({ show, loading, error, onClose, onP
   if (error)
     renderModal = (
       <>
-        <h2 className='modal-title'>{error.message}</h2>
-        <button className='modal-close-button' onClick={onClose}>
+        <h2 className='modal-title'>{error.response.data.error}</h2>
+        <Button type='fail' disabled={false} onClick={onClose}>
           Close
-        </button>
+        </Button>
       </>
     );
 

@@ -1,15 +1,19 @@
 import React from 'react';
 import './Button.css';
 
+type buttonType = 'success' | 'fail';
+
 interface Props {
   children: string | number;
   disabled: boolean;
+  type: buttonType;
   onClick: () => void;
 }
 
-const Button: React.FC<Props> = ({ children, disabled, onClick }) => {
+const Button: React.FC<Props> = ({ children, disabled, type, onClick }) => {
+  const className = type === 'fail' ? 'button button-fail' : 'button';
   return (
-    <button className='button' onClick={onClick} disabled={disabled}>
+    <button className={className} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );

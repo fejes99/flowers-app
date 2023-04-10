@@ -44,7 +44,7 @@ const ProfileModal: React.FC<Props> = ({ show, user, onClose, onFetchUser, onLog
           <label>Last Name:</label>
           <span>{user?.data?.last_name}</span>
         </div>
-        <Button disabled={false} onClick={handleLogout}>
+        <Button type='fail' disabled={false} onClick={handleLogout}>
           Logout
         </Button>
       </div>
